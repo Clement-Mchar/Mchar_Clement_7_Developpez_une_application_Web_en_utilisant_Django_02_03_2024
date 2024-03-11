@@ -9,7 +9,11 @@
     </div>
     <div class="login">
         <h1>Connectez-vous</h1>
-        <button href="inscription.html">Se connecter</button>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" >Se connecter</button>
+        </form>
     </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, request
 
@@ -9,7 +9,21 @@ from . import forms
 # Create your views here.
 def homepage(request):
     render(request, 'app/base.html')
-    return render(request, 'app/homepage.html')
+    form = forms.LoginForm()
+    message = ''
+    if request.method == 'POST':
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+            )
+            if user is not None:
+                login(request, user)
+                return redirect(settings.LOGIN_REDIRECT_URL)
+            else:
+                message = 'Identifiants invalides.'
+    return render(request, 'app/homepage.html', context={'form': form, 'message': message})
 
 def welcome(request):
     render(request, 'app/base.html')
@@ -22,7 +36,5 @@ def sign_up(request):
         form = forms.SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # auto-login user
             login(request, user)
-            return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, 'app/sign-up.html', context={'form': form})
