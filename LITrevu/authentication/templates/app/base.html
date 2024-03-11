@@ -1,0 +1,28 @@
+{% load static %}
+{% load compress %}
+{% compress css %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LITRevu{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles/base/base.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/homepage/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/sign-up/sign-up.css' %}">
+    {% endcompress %}
+</head>
+<body>
+    <section>
+        <div class="logo">
+            {% block logo %}
+            <img src="../../static/app/images/LITrevu.png" alt="">
+            {% endblock %}
+        </div>
+        {% block content %}
+
+        {% endblock %}
+        
+    </section>
+</body>
+</html>

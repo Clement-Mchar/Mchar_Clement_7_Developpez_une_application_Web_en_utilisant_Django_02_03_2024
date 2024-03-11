@@ -1,0 +1,13 @@
+.sign-up-placeholder{
+    height: 5vh;
+}
+.sign-up-bloc{
+    display: flex;
+    flex-direction: column;
+    .sign-up-form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    }
+}
