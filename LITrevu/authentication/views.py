@@ -1,6 +1,7 @@
 from django.conf import settings
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, request
 
 from . import forms
@@ -25,6 +26,7 @@ def homepage(request):
                 message = 'Identifiants invalides.'
     return render(request, 'app/homepage.html', context={'form': form, 'message': message})
 
+@login_required
 def welcome(request):
     render(request, 'app/base.html')
     return render(request, 'app/welcome.html')
@@ -38,3 +40,9 @@ def sign_up(request):
             user = form.save()
             login(request, user)
     return render(request, 'app/sign-up.html', context={'form': form})
+
+def logout_user(request):
+
+    logout(request)
+    return redirect('homepage')
+    
