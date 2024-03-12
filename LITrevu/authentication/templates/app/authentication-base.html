@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}LITRevu{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'styles/base/base.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/homepage/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/sign/sign.css' %}">
     <link rel="stylesheet" href="{% static 'styles/sign-up/sign-up.css' %}">
     {% endcompress %}
 </head>
@@ -19,6 +19,11 @@
             <img src="../../static/app/images/LITrevu.png" alt="">
             {% endblock %}
         </div>
+        {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        {% endif %}
         {% block content %}
 
         {% endblock %}

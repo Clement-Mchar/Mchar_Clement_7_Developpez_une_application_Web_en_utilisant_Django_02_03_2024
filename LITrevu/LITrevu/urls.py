@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from authentication import views
+from features import views as features_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('homepage', views.homepage, name='homepage'),
+    path('sign', views.homepage, name='sign'),
     path('sign-up', views.sign_up, name='sign-up'),
     path('welcome', views.welcome, name='welcome'),
     path('logout/', views.logout_user, name='logout'),
+    path('flux', features_views.flux, name='flux'),
 ]

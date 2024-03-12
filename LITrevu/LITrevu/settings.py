@@ -58,7 +58,11 @@ ROOT_URLCONF = 'LITrevu.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR, '/templates/',
+            BASE_DIR, 'authentication/templates/',
+            BASE_DIR, 'features/templates/',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,19 +124,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'authentication/static/app') 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/app/') 
 STATICFILES_FINDERS =(
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
-) 
+)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'features/static/app/'),
+    os.path.join(BASE_DIR, 'authentication/static/app/')
+]
 COMPRESS_PRECOMPILERS = (    
     ('text/x-scss', 'django_libsass.SassCompiler'),
-    ('text/x-scss', 'sass --scss {accueil.css} {accueil.css}'),
 )
 
 COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = False
+COMPRESS_OFFLINE = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -141,6 +148,6 @@ AUTH_USER_MODEL = 'authentication.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = ('welcome')
+LOGIN_REDIRECT_URL = ('flux')
 
 LOGIN_URL = 'homepage'
