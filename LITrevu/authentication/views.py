@@ -9,6 +9,7 @@ from . import forms
 
 # Create your views here.
 def homepage(request):
+    logout(request)
     render(request, 'app/base.html')
     form = forms.LoginForm()
     message = ''
