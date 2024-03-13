@@ -1,0 +1,58 @@
+.placeholder {
+  height: 18vh;
+}
+
+.connexion {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 120vh;
+  align-self: center;
+}
+.connexion .sign-up {
+  display: flex;
+  flex-direction: column;
+}
+.connexion .sign-up button {
+  width: 16vh;
+  font-size: 3vh;
+  max-width: 16vh;
+  padding: 0.1vh;
+  border: none;
+  max-height: 5vh;
+  min-height: 5vh;
+  align-self: center;
+  border-radius: 3vh;
+  background-color: rgba(234, 236, 236, 0.8);
+  text-decoration: none;
+}
+.connexion .sign-up button:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.connexion .sign-up button a {
+  text-decoration: none;
+  color: black;
+}
+.connexion .login {
+  display: flex;
+  flex-direction: column;
+}
+.connexion .login button {
+  align-self: flex-end;
+  width: 21vh;
+  font-size: 3vh;
+  max-width: 29vh;
+  padding: 0.1vh;
+  border: none;
+  max-height: 5vh;
+  min-height: 5vh;
+  border-radius: 3vh;
+  background-color: rgba(234, 236, 236, 0.8);
+}
+.connexion .login button:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=homepage.css.map */

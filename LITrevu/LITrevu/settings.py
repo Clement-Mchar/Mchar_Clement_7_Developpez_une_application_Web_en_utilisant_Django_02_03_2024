@@ -136,10 +136,11 @@ STATICFILES_DIRS = [
 ]
 COMPRESS_PRECOMPILERS = (    
     ('text/x-scss', 'django_libsass.SassCompiler'),
+    ('text/x-scss', 'sass --scss {styles.scss} {styles.css}')
 )
 
 COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -150,4 +151,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = ('flux')
 
-LOGIN_URL = 'homepage'
+LOGIN_URL = 'sign'

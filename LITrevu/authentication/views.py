@@ -9,7 +9,7 @@ from . import forms
 
 
 # Create your views here.
-def homepage(request):
+def sign(request):
     if request.user.is_authenticated:
         return redirect('flux')
     form = forms.LoginForm(request.POST if request.method == 'POST' else None)
@@ -20,6 +20,7 @@ def homepage(request):
         )
         if user is not None:
             login(request, user)
+            messages.success(request, 'bravo chakal')
             return redirect(settings.LOGIN_REDIRECT_URL)
         else:
             messages.error(request, "Identifiants invalides")
