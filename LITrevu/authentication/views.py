@@ -35,7 +35,6 @@ def sign_up(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            messages.success('bravo')
     return render(request, 'app/sign-up.html', context={'form': form})
 
 def logout_user(request):

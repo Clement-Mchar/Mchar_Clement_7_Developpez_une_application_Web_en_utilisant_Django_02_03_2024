@@ -29,4 +29,6 @@ urlpatterns = [
     path('posts/create_review', features_views.create_review, name='create_review'),
     path('posts/create_ticket', features_views.create_ticket, name='create_ticket'),
     path('posts/', features_views.user_posts, name='user_posts'),
+    path('followings', features_views.followings, name='followings'),
+    path('posts/<id>/', features_views.ticket, name='ticket'),
 ]

@@ -2,12 +2,13 @@
 {% block title %}LITrevu{% endblock %}
 {% block content %}
 <h2>Créer une critique</h2>
-{% if form.errors %}
-        {{ form.errors }}
+{% if form2.errors and form2.errors %}
+        {{ form1.errors }}{{ form2.errors }}
 {% endif %}
-<form action="" method="post" novalidate>
+<form action="" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form1.as_p }}
+    {{ form2.as_p }}
     <input type="submit" value="Envoyer">
 </form>
 {% endblock %} 

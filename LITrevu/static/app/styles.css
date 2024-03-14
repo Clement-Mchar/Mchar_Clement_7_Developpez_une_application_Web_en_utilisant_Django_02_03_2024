@@ -1,3 +1,12 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+h2 {
+  text-align: center;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -26,6 +35,10 @@ body header h1 {
   flex: 1.2;
   font-size: 4vh;
 }
+body header h1 a {
+  text-decoration: none;
+  color: black;
+}
 body header nav {
   padding-right: 1vh;
   flex: 1;
@@ -36,8 +49,6 @@ body header nav a {
   padding-top: 0.5vh;
   padding-bottom: 0.5vh;
   margin-right: -0.5vh;
-  text-decoration: none;
-  color: black;
   font-size: 2vh;
   border-left: 0.2vh solid rgb(214, 212, 212);
   font-family: Verdana, Geneva, Tahoma, sans-serif;

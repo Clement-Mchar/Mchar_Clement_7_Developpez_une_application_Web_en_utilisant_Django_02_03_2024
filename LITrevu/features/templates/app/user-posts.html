@@ -6,4 +6,12 @@
     <button><a href="{% url 'create_review' %}">Créer une critique</a></button>
 </div>
 <h2>Mes posts</h2>
+{% for post in posts %}
+    {% if post.content_type == 'TICKET' %}
+        {% include 'app/ticket-snippet.html' %}
+    {% elif post.content_type == 'REVIEW' %}
+        {% include 'app/review-snippet.html' %}
+    {% endif %}
+{% endfor %}
+
 {% endblock %} 
