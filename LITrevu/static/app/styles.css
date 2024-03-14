@@ -81,5 +81,9 @@ body section .publish button:hover {
   cursor: pointer;
   box-shadow: none;
 }
+body section .publish button a {
+  text-decoration: none;
+  color: black;
+}
 
 /*# sourceMappingURL=styles.css.map */

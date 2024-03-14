@@ -2,7 +2,7 @@
 {% block title %}LITrevu{% endblock %}
 {% block content %}
 <div class="publish">
-    <button>Demander une critique</button>
-    <button>Créer une critique</button>
+    <button><a href="{% url 'create_ticket' %}">Demander une critique</a></button>
+    <button><a href="{% url 'create_review' %}">Créer une critique</a></button>
 </div>
 {% endblock %} 
