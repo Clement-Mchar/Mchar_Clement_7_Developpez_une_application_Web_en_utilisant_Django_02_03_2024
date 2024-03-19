@@ -1,5 +1,39 @@
-{% block content %}
 <div class="review-snippet">
-    <h2>L'identifiant est {{ post.id }} {{ post.headline }}</h2>
+    <a href="{% url 'review' post.id %}">
+        <div class="review-header">
+            {% if post.user == request.user %}
+                <p>Vous avez publié une critique</p>
+            {% else %}
+                <p>{{ post.user }} a publié une critique </p>
+            {% endif %}
+            <p>{{ post.time_created }}</p>
+        </div>
+    </a>
+    <div class="review-body">
+        <p>{{ post.headline }}</p>
+        <p>{{ post.rating }}</p>
+        <p>{{ post.body }}</p>
+        
+            <div class="review-ticket">
+                <a href="{% url 'ticket' post.id %}">
+                <p>Ticket - {{ post.ticket.user }}</p>
+                <p>{{ post.ticket.title }}</p>
+                <p>{{ post.ticket.description }}</p>
+                <p>{{ post.ticket.image }}</p>    
+            </div>
+        {% if post.user == request.user %}
+            <a href="{% url 'update_review' post.id %}">Modifier</a>
+            <a href="#modal-window">Supprimer</a>
+            <div id="modal-window">
+                <div class="modal">
+                    <p>Voulez vous supprimer ce ticket ? </p>
+                    <form action="{% url 'delete_ticket' post.id %}" method="post">
+                        {% csrf_token %}
+                        <input class="delete-form" type="submit" value="Oui">
+                    </form>
+                    <button class="close-modal">Non</button>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 </div>
-{% endblock %} 

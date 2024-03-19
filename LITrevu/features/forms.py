@@ -3,8 +3,8 @@ from .models import Review, Ticket
 
 class TicketForm(forms.ModelForm):
    class Meta:
-    model = Ticket
-    exclude = ('user',)
+      model = Ticket
+      exclude = ('user',)
 
 class ReviewForm(forms.ModelForm):
    class Meta:

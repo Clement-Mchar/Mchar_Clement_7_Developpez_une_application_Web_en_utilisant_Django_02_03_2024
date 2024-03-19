@@ -11,7 +11,6 @@ body{
     background-image: url('images/woodplanks_background.jpg');
     background-size: cover;
     margin : 0vh 5vh 0vh 5vh;
-
     header{
         display: flex;
         flex-direction: row;
@@ -67,6 +66,19 @@ body{
         max-width: 80vw;
         min-width: 80vw;
         min-height: 50vw;
+        max-height: 88vh;
+        overflow: hidden;
+        .posts-container{
+            display: flex;
+            box-shadow: inset #dadada 0px 2px 19px 2px;
+            align-items: center;
+            flex-direction: column;
+            overflow: overlay;
+            max-height: 74vh;
+            scrollbar-width: none;
+            margin-left: -3vh;
+            margin-right: -3vh;
+        }
         .publish{
             display: flex;
             flex-direction: row;
@@ -93,6 +105,54 @@ body{
                     text-decoration: none;
                     color: black;
                 }
+            }
+        }
+        .review-ticket{
+            display: flex;
+            flex-direction: column;
+            border: 0.3vh solid black;
+            height: max-content;
+            margin-top: 2.5vh;
+            margin-bottom: 2.5vh;
+            padding-left: 1vh;
+            padding-right: 1vh;
+        }
+        .ticket-snippet{
+            display: flex;
+            flex-direction: column;
+            border: 0.3vh solid black;
+            height: max-content;
+            width: 70vh;
+            margin-top: 2.5vh;
+            margin-bottom: 2.5vh;
+            padding-left: 1vh;
+            padding-right: 1vh;
+            .ticket-header{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .ticket-body{
+                display: flex;
+                flex-direction: column;
+                width: 20vh;
+                margin-bottom: 2.5vh;
+            }
+        }
+        .review-snippet{
+            display: flex;
+            flex-direction: column;
+            border: 0.3vh solid black;
+            height: max-content;
+            width: 70vh;
+            margin-top: 2.5vh;
+            margin-bottom: 2.5vh;
+            padding-left: 1vh;
+            padding-right: 1vh;
+            .review-header{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
             }
         }
     }

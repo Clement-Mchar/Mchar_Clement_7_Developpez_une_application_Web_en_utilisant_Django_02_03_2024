@@ -1,8 +1,36 @@
-{% block content %}
-<a href="{% url 'ticket' post.id %}">
-    <div class="ticket-snippet">
-        <h2>L'identifiant est {{ post.id }} {{ post.title }}</h2>
+<div class="ticket-snippet">
+    <a href="{% url 'ticket' post.id %}">
+        <div class="ticket-header">
+            {% if post.user == request.user %}
+                <p>Vous avez publié un ticket</p>
+            {% else %}
+                <p>{{ post.user }} a demandé une critique </p>
+            {% endif %}
+                <p>{{ post.time_created }}</p>
+        </div>
+    </a>
+    <div class="ticket-body">
+        <p>{{ post.title }}</p>
+        <p>{{ post.description }}</p>
+        {% if post.image %}
+            <img src='{{ post.image.url }}'>
+        {% endif %}
     </div>
-</a>
-{% endblock %} 
+    {% if post.user == request.user %}
+        <a href="{% url 'update_ticket' post.id %}">Modifier</a>
+        <a href="#modal-window">Supprimer</a>
+        <div id="modal-window">
+            <div class="modal">
+                <p>Voulez vous supprimer ce ticket ? </p>
+                <form action="{% url 'delete_ticket' post.id %}" method="post">
+                    {% csrf_token %}
+                    <input class="delete-form" type="submit" value="Oui">
+                </form>
+                <button class="close-modal">Non</button>
+            </div>
+        </div>
+        
+    {% endif %}
+</div>
+
 

@@ -5,7 +5,7 @@
 {% if form2.errors and form2.errors %}
         {{ form1.errors }}{{ form2.errors }}
 {% endif %}
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form1.as_p }}
     {{ form2.as_p }}
