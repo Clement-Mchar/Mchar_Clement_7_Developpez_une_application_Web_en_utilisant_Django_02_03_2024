@@ -3,7 +3,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.db.models import CharField, Value
 from itertools import chain
-from .forms import TicketForm, ReviewForm, ReviewResponse
+from .forms import TicketForm, ReviewForm
 from .models import Ticket, Review
 
 # Create your views here.
@@ -23,6 +23,7 @@ def create_review(request):
         review.ticket = ticket
         review.user = request.user
         review.save()
+        return redirect('user_posts')
     return render(request, 'app/create-review.html', context={'form1':form1, 'form2':form2})
 
 @login_required
@@ -95,3 +96,4 @@ def delete_review(request, id):
     if request.method == 'POST':
         review.delete()
         return redirect('user_posts')
+

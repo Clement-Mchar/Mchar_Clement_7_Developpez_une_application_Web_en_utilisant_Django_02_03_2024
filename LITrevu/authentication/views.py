@@ -4,6 +4,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, request
 from django.contrib import messages
+from .models import User
+from .forms import FollowingForm
 
 from . import forms
 
@@ -27,7 +29,7 @@ def sign(request):
     return render(request, 'app/sign.html', locals())
 
 @login_required
-def welcome(request):
+def welcome():
     return redirect('flux')
 
 def sign_up(request):
@@ -41,4 +43,17 @@ def logout_user(request):
 
     logout(request)
     return redirect('sign')
-    
+
+@login_required
+def follow_user(request):
+    form = FollowingForm(request.POST if request.method == 'POST' else None)
+    if request.method == 'POST':
+        if form.is_valid():
+            following = form.save(commit=False)
+            following_name = form.cleaned_data["username"]
+            followed_user = User.objects.get(username=following_name)
+            following.followed_user = followed_user
+            following.user = request.user
+            following.save()
+        return redirect('followings')
+    return render(request, 'app/followings.html', {'form':form})

@@ -18,8 +18,7 @@
                 <a href="{% url 'ticket' post.id %}">
                 <p>Ticket - {{ post.ticket.user }}</p>
                 <p>{{ post.ticket.title }}</p>
-                <p>{{ post.ticket.description }}</p>
-                <p>{{ post.ticket.image }}</p>    
+                <p>{{ post.ticket.description }}</p>   
             </div>
         {% if post.user == request.user %}
             <a href="{% url 'update_review' post.id %}">Modifier</a>
@@ -27,7 +26,7 @@
             <div id="modal-window">
                 <div class="modal">
                     <p>Voulez vous supprimer ce ticket ? </p>
-                    <form action="{% url 'delete_ticket' post.id %}" method="post">
+                    <form action="{% url 'delete_review' post.id %}" method="post">
                         {% csrf_token %}
                         <input class="delete-form" type="submit" value="Oui">
                     </form>

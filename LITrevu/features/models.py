@@ -28,13 +28,3 @@ class Review(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
 
 
-class UserFollow(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='following')
-    followed_user = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='followed_by')
-    class Meta:
-        # ensures we don't get multiple UserFollows instances
-        # for unique user-user_followed pairs
-        unique_together = ('user', 'followed_user', )
