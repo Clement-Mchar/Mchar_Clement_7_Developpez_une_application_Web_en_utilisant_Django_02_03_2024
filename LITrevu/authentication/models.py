@@ -30,3 +30,14 @@ class UserFollow(models.Model):
         # for unique user-user_followed pairs
         unique_together = ('user', 'followed_user', )
 
+class BlockedUser(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blocker')
+    blocked_user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blocked_user')
+    class Meta:
+        # ensures we don't get multiple UserFollows instances
+        # for unique user-user_followed pairs
+        unique_together = ('user', 'blocked_user', )
+

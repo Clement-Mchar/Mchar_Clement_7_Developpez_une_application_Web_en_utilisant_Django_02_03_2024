@@ -37,7 +37,9 @@ urlpatterns = [
     path('edit_ticket/<id>/', features_views.update_ticket, name='update_ticket'),
     path('edit_review/<id>/', features_views.update_review, name='update_review'),
     path('delete_ticket/<id>', features_views.delete_ticket, name='delete_ticket'),
-    path('delete_review/<id>', features_views.delete_review, name='delete_review')
+    path('delete_review/<id>', features_views.delete_review, name='delete_review'),
+    path('unfollow/<id>', views.unfollow, name='unfollow'),
+    path('block/<id>', views.block_user, name='block_user'),
 ]
 
 if settings.DEBUG:

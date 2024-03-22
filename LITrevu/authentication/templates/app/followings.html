@@ -20,6 +20,28 @@
 {% for following in followings %}
     {% if following.user == request.user %}
         <p>{{ following.followed_user.username }}</p>
+        <a href="#unfollow">Se désabonner</a>
+        <a href="#block_user">Bloquer</a>
+        <div id="unfollow">
+            <div class="modal">
+                <p>Se désabonner de {{ following.followed_user.username }} ? </p>
+                <form action="{% url 'unfollow' following.id %}" method="post">
+                    {% csrf_token %}
+                    <input class="unfollow-form" type="submit" value="Oui">
+                </form>
+                <button class="close-modal">Non</button>
+            </div>
+        </div>
+        <div id="block_user">
+            <div class="modal">
+                <p>Bloquer {{ following.followed_user.username }} ? </p>
+                <form action="{% url 'block_user' following.id%}" method="post">
+                    {% csrf_token %}
+                    <input class="unfollow-form" type="submit" value="Oui">
+                </form>
+                <button class="close-modal">Non</button>
+            </div>
+        </div>
     {% endif %}
 {% endfor %}
 {% endblock %} 
