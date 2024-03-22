@@ -15,6 +15,7 @@
         {% if post.image %}
             <img src='{{ post.image.url }}'>
         {% endif %}
+        <button><a href="{% url 'ticket_response' post.id %}">Créer une critique</a></button>
     </div>
     {% if post.user == request.user %}
         <a href="{% url 'update_ticket' post.id %}">Modifier</a>

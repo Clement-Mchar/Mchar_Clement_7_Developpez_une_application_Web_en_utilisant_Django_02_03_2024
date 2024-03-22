@@ -33,6 +33,7 @@ urlpatterns = [
     path('posts/', features_views.user_posts, name='user_posts'),
     path('followings', views.follow_user, name='followings'),
     path('ticket/<id>/', features_views.ticket, name='ticket'),
+    path('ticket_response/<id>/', features_views.ticket_response, name='ticket_response'),
     path('review/<id>/', features_views.review, name='review'),
     path('edit_ticket/<id>/', features_views.update_ticket, name='update_ticket'),
     path('edit_review/<id>/', features_views.update_review, name='update_review'),

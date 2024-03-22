@@ -18,7 +18,7 @@
                 <a href="{% url 'ticket' post.ticket.id %}">
                 <p>Ticket - {{ post.ticket.user }}</p>
                 <p>{{ post.ticket.title }}</p>
-                <p>{{ post.ticket.description }}</p>   
+                <p>{{ post.ticket.description }}</p> 
             </div>
         {% if post.user == request.user %}
             <a href="{% url 'update_review' post.id %}">Modifier</a>

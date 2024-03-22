@@ -26,6 +26,19 @@ def create_review(request):
     return render(request, 'app/create-review.html', context={'form1':form1, 'form2':form2})
 
 @login_required
+def ticket_response(request, id):
+    ticket = Ticket.objects.get(id=id)
+    form = ReviewForm(request.POST if request.method == 'POST' else None)
+    if request.method == 'POST':
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.ticket = ticket
+            review.user = request.user
+            review.save()
+            return redirect('user_posts')
+    return render(request, 'app/ticket_response.html', context={'form':form, 'ticket':ticket})
+
+@login_required
 def create_ticket(request):
     form = TicketForm(request.POST if request.method == 'POST' else None, request.FILES if request.method =='POST' else None)
     if request.method == 'POST':
