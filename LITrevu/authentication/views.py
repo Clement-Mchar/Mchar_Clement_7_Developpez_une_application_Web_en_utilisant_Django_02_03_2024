@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, request
 from django.contrib import messages
-from .models import User
+from .models import User, UserFollow
 from .forms import FollowingForm
 
 from . import forms
@@ -33,6 +33,8 @@ def welcome():
     return redirect('flux')
 
 def sign_up(request):
+    if request.user.is_authenticated:
+        return redirect('flux')
     form = forms.SignupForm(request.POST if request.method == 'POST' else None)
     if request.method == 'POST':
         if form.is_valid():
@@ -47,13 +49,9 @@ def logout_user(request):
 @login_required
 def follow_user(request):
     form = FollowingForm(request.POST if request.method == 'POST' else None)
+    followings = UserFollow.objects.all()
     if request.method == 'POST':
         if form.is_valid():
-            following = form.save(commit=False)
-            following_name = form.cleaned_data["username"]
-            followed_user = User.objects.get(username=following_name)
-            following.followed_user = followed_user
-            following.user = request.user
-            following.save()
-        return redirect('followings')
-    return render(request, 'app/followings.html', {'form':form})
+            UserFollow.objects.create(user=request.user, followed_user=User.objects.get(username__iexact=form.cleaned_data['username']))
+            return redirect('followings')
+    return render(request, 'app/followings.html', {'form':form, 'followings':followings})

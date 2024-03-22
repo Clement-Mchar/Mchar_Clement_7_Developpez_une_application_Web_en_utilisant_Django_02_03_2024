@@ -15,7 +15,7 @@
         <p>{{ post.body }}</p>
         
             <div class="review-ticket">
-                <a href="{% url 'ticket' post.id %}">
+                <a href="{% url 'ticket' post.ticket.id %}">
                 <p>Ticket - {{ post.ticket.user }}</p>
                 <p>{{ post.ticket.title }}</p>
                 <p>{{ post.ticket.description }}</p>   

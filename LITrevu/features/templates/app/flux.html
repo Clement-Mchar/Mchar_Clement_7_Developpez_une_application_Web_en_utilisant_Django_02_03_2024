@@ -5,4 +5,25 @@
     <button><a href="{% url 'create_ticket' %}">Demander une critique</a></button>
     <button><a href="{% url 'create_review' %}">Créer une critique</a></button>
 </div>
-{% endblock %} 
+<h2>Mes posts</h2>
+<div class="posts-container">
+    {% for post in posts %}
+        {% if post.user == request.user %}
+            {% if post.content_type == 'TICKET' %}
+                {% include 'app/ticket-snippet.html' %}
+            {% elif post.content_type == 'REVIEW' %}
+                {% include 'app/review-snippet.html' %}
+            {% endif %}
+        {% endif %}
+        {% for following in followings %}
+            {% if following.followed_user == post.user %}
+                {% if post.content_type == 'TICKET' %}
+                    {% include 'app/ticket-snippet.html' %}
+                {% elif post.content_type == 'REVIEW' %}
+                    {% include 'app/review-snippet.html' %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}

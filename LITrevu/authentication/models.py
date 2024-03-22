@@ -9,7 +9,7 @@ from .managers import UserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    username = models.CharField(max_length=40, unique=True)
+    username = models.CharField(max_length=40, unique=True, verbose_name="Nom d'utilisateur")
     is_active = models.BooleanField(('active'), default=True)
     is_staff = models.BooleanField(('staff'), default=False)
     is_superuser = models.BooleanField(('superuser'), default=False)

@@ -10,4 +10,16 @@
     {{ form.as_p }}
     <input type="submit" value="Envoyer">
 </form>
+<h2>Mes abonnés</h2>
+{% for following in followings %}
+    {% if following.followed_user == request.user %}
+        <p>{{ following.user.username }}</p>
+    {% endif %}
+{% endfor %}
+<h2>Mes abonnements</h2>
+{% for following in followings %}
+    {% if following.user == request.user %}
+        <p>{{ following.followed_user.username }}</p>
+    {% endif %}
+{% endfor %}
 {% endblock %} 
