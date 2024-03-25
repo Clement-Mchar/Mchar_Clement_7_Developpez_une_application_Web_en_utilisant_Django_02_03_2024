@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('authentication', '0003_alter_user_username_userblocked'),
+        ("authentication", "0003_alter_user_username_userblocked"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='UserBlocked',
-            new_name='BlockedUser',
+            old_name="UserBlocked",
+            new_name="BlockedUser",
         ),
     ]
