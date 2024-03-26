@@ -58,10 +58,8 @@ body header nav a {
   align-items: center;
   padding-left: 1vh;
   padding-right: 1vh;
-  padding-top: 0.5vh;
-  padding-bottom: 0.5vh;
   font-size: 2vh;
-  height: 5vh;
+  height: 7vh;
   border-left: 0.2vh solid rgb(235, 235, 235);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -79,6 +77,7 @@ body section {
   max-height: 88vh;
   overflow: hidden;
   margin-top: 11vh;
+  padding-bottom: 1vh;
 }
 body section h2 {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -95,10 +94,13 @@ body section .posts-container {
   align-items: center;
   flex-direction: column;
   overflow: overlay;
-  height: 100%;
+  height: 90%;
   scrollbar-width: none;
   margin-left: -3vh;
   margin-right: -3vh;
+}
+body section .posts-container .posts-wrapper {
+  padding: 3vh;
 }
 body section .publish {
   display: flex;
@@ -132,11 +134,70 @@ body section .review-ticket {
   display: flex;
   flex-direction: column;
   border: 0.3vh solid black;
+  width: 82vh;
   height: max-content;
-  margin-top: 2.5vh;
-  margin-bottom: 2.5vh;
   padding-left: 1vh;
   padding-right: 1vh;
+  margin-top: 3vh;
+}
+body section .ticket-response {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: max-content;
+  padding-left: 1vh;
+  padding-right: 1vh;
+  margin-bottom: 1vh;
+}
+body section .ticket-response-form {
+  display: flex;
+  flex-direction: column;
+  border: 0.3vh solid black;
+  border-top: none;
+  width: 82vh;
+  height: max-content;
+  padding-left: 1vh;
+  padding-right: 1vh;
+  padding-right: 1vh;
+  padding-bottom: 1vh;
+}
+body section .ticket-response-form form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+body section .ticket-response-form form .form-fields {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+body section .ticket-response-form p {
+  display: flex;
+  flex-direction: column;
+}
+body section .ticket-response-form p input[type=file] {
+  overflow: hidden;
+  width: 13vh;
+}
+body section .ticket-response-form p input[type=file]:active {
+  overflow: visible;
+  width: max-content;
+}
+body section .ticket-response-form p label {
+  margin-bottom: 1vh;
+}
+body section .ticket-response-form p #id_description {
+  height: 30vh;
+}
+body section .ticket-response-form p #id_title {
+  height: 6vh;
+}
+body section .ticket-response-form .send {
+  align-self: flex-end;
+  width: 8vh;
+  display: flex;
 }
 body section .ticket-snippet {
   display: flex;
@@ -155,17 +216,29 @@ body section .ticket-snippet .ticket-header {
   flex-direction: row;
   justify-content: space-between;
 }
-body section .ticket-snippet .ticket-body {
+body section .ticket-snippet .ticket-buttons {
   display: flex;
-  flex-direction: column;
-  width: 20vh;
-  margin-bottom: 2.5vh;
+  flex-direction: row;
+  justify-content: space-between;
+}
+body section .ticket-snippet .ticket-buttons button {
+  font-size: 1.5vh;
+  max-width: 29vh;
+  border: 0.2vh solid #000000;
+  max-height: 3vh;
+  min-height: 3vh;
+  margin-right: 1vh;
+}
+body section .ticket-snippet .ticket-buttons button:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 body section .ticket-snippet .create-review {
   align-self: self-end;
   font-size: 1.5vh;
   max-width: 29vh;
   border: 0.2vh solid #000000;
+  border-top: none;
   max-height: 3vh;
   min-height: 3vh;
 }
@@ -188,6 +261,53 @@ body section .review-snippet .review-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+body section .form {
+  display: flex;
+  flex-direction: column;
+  border: 0.3vh solid black;
+  width: 82vh;
+  height: max-content;
+  padding-left: 1vh;
+  padding-right: 1vh;
+}
+body section .form form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+body section .form form .form-fields {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+body section .form p {
+  display: flex;
+  flex-direction: column;
+}
+body section .form p input[type=file] {
+  overflow: hidden;
+  width: 13vh;
+}
+body section .form p input[type=file]:active {
+  overflow: visible;
+  width: max-content;
+}
+body section .form p label {
+  margin-bottom: 1vh;
+}
+body section .form p #id_description {
+  height: 30vh;
+}
+body section .form p #id_title {
+  height: 6vh;
+}
+body section .form .send {
+  align-self: flex-end;
+  width: 8vh;
+  display: flex;
 }
 body .following-page {
   display: flex;
@@ -260,6 +380,50 @@ body .following-page .followed-list .followed-users .followed-user .followers-bu
   background-color: rgb(255, 255, 255);
   cursor: pointer;
 }
+body .following-page .followers-list {
+  width: 100vh;
+  text-align-last: center;
+}
+body .following-page .followers-list .followers .follower:nth-child(even) {
+  background-color: #ffffff;
+}
+body .following-page .followers-list .followers .follower:nth-child(even) .followers-buttons a:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+body .following-page .followers-list .followers .follower {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0.1vh solid #e1e1e1;
+  background-color: #f1f1f1;
+  height: 4vh;
+  padding-left: 1vh;
+  margin-bottom: 0.3vh;
+}
+body .following-page .followers-list .followers .follower p {
+  margin: 0vh;
+  margin-right: 1vh;
+}
+body .following-page .followers-list .followers .follower .followers-buttons {
+  height: 4vh;
+  display: flex;
+  max-width: 30vh;
+}
+body .following-page .followers-list .followers .follower .followers-buttons a {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  border-left: 0.3vh solid #e1e1e1;
+  justify-content: center;
+  padding-left: 1vh;
+  padding-right: 1vh;
+}
+body .following-page .followers-list .followers .follower .followers-buttons a:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
 body .modal-window {
   display: flex;
   justify-content: center;
@@ -314,6 +478,46 @@ body .modal-window .modal input {
   border-radius: 3vh;
 }
 body .modal-window .modal input:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+body .ticket-body {
+  display: flex;
+  flex-direction: column;
+  width: 60vh;
+  margin-bottom: 2.5vh;
+  padding-bottom: 1vh;
+  padding-left: 1vh;
+  border: 0.3vh solid black;
+}
+body .ticket-body img {
+  width: 20vh;
+}
+body .review-body {
+  display: flex;
+  flex-direction: column;
+  width: 60vh;
+  margin-bottom: 2.5vh;
+  padding-bottom: 1vh;
+  padding-left: 1vh;
+}
+body .review-body img {
+  width: 20vh;
+}
+body .review-body .review-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+body .review-body .review-buttons button {
+  font-size: 1.5vh;
+  max-width: 29vh;
+  border: 0.2vh solid #000000;
+  max-height: 3vh;
+  min-height: 3vh;
+  margin-right: 1vh;
+}
+body .review-body .review-buttons button:hover {
   background-color: rgb(255, 255, 255);
   cursor: pointer;
 }

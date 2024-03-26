@@ -1,6 +1,7 @@
 import uuid
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
+from django.db.models import UniqueConstraint
 from django.conf import settings
 from django.db import models
 from .managers import UserManager
@@ -38,10 +39,10 @@ class UserFollow(models.Model):
     class Meta:
         # ensures we don't get multiple UserFollows instances
         # for unique user-user_followed pairs
-        unique_together = (
-            "user",
-            "followed_user",
-        )
+        constraints = [
+            UniqueConstraint(name="unique_follow", fields={'user', "followed_user"})
+        ]
+
 
 
 class BlockedUser(models.Model):

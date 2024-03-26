@@ -32,13 +32,15 @@ urlpatterns = [
     path("posts/create_review", features_views.create_review, name="create_review"),
     path("posts/create_ticket", features_views.create_ticket, name="create_ticket"),
     path("posts/", features_views.user_posts, name="user_posts"),
-    path("followings", views.follow_user, name="followings"),
+    path("followings", features_views.followings, name="followings"),
+    path("follow_user", views.follow_user, name="follow_user"),
     path("followings#unfollow", views.follow_user, name="unfollow_modal"),
-    path("followings#block_user", views.follow_user, name="block_modal"),
+    path("followings#block-user", views.follow_user, name="block_modal"),
+    path("followings#delete-follow", views.follow_user, name="delete_follow_modal"),
     path("ticket/<id>/", features_views.ticket, name="ticket"),
     path("ticket/<id>/#modal-ticket", features_views.ticket, name="ticket_modal"),
     path(
-        "ticket_response/<id>/", features_views.ticket_response, name="ticket_response"
+        "ticket_response/<id>", features_views.ticket_response, name="ticket_response"
     ),
     path("review/<id>/#modal-review", features_views.review, name="review"),
     path("review/<id>/", features_views.review, name="review_modal"),
@@ -47,6 +49,7 @@ urlpatterns = [
     path("delete_ticket/<id>", features_views.delete_ticket, name="delete_ticket"),
     path("delete_review/<id>", features_views.delete_review, name="delete_review"),
     path("unfollow/<id>", views.unfollow, name="unfollow"),
+    path("delete_follow/<id>", views.delete_follow, name="delete_follow"),
     path("block/<id>", views.block_user, name="block_user"),
 ]
 

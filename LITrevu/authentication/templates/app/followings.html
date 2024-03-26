@@ -7,42 +7,46 @@
         {{ form.errors }}
     {% endif %}
     <div class="follow-users">
-        <form action="{% url 'followings' %}" method="post">
+        <form action="{% url 'follow_user' %}" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input class="follow-button"type="submit" value="Suivre">
         </form>
     </div>
-    <h3>Mes abonnés</h3>
-    {% if not followers_list %}
-        <p>Vous n'avez aucun abonné pour le moment</p>
-    {% endif %}
-    {% for following in followings %}
-        {% if following.followed_user == request.user %}
-            <p>{{ following.user.username }}</p>
-        {% endif %}
-    {% endfor %}
-    <h3>Mes abonnements</h3>
+    <h3>Abonnés</h3>
+    <div class="followers-list">
+        <div class="followers">
+            {% for following in user.followed_by.all %}
+                <div class="follower">
+                    <p>{{ following.user.username }}</p>
+                    <div class="followers-buttons">
+                        <a href="#delete-follow{{ following.id }}">Retirer des followers</a>
+                        <a href="#block-user{{ following.id }}">Bloquer</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Vous n'avez aucun abonné pour le moment</p>
+            {% endfor %}
+        </div>
+    </div>
+    <h3>Abonnements</h3>
     <div class="followed-list">
-        {% if not followings_list %}
-            <p>Vous n'êtes abonnés à personne pour le moment</p>
-        {% endif %}
-            <div class="followed-users">
-                {% for following in followings %}
-                {% if following.user == request.user %}
+        <div class="followed-users">
+            {% for following in user.following.all %}
                 <div class="followed-user">
                     <p>{{ following.followed_user.username }}</p>
                     <div class="followers-buttons">
-                        <a href="#unfollow">Se désabonner</a>
-                        <a href="#block_user">Bloquer</a>
+                        <a href="#unfollow{{ following.id }}">Se désabonner</a>
+                        <a href="#block-user{{ following.id }}">Bloquer</a>
                     </div>
                 </div>
-                {% endif %}
-                {% endfor %}
-            </div>
+            {% empty %}
+                <p>Vous n'êtes abonnés à personne pour le moment</p>
+            {% endfor %}
+        </div>
     </div>
-    {% for following in followings %}
-            <div id="unfollow" class="modal-window">
+        {% for following in user.following.all %}
+            <div id="unfollow{{ following.id }}" class="modal-window">
                 <div class="modal">
                     <p>Se désabonner de {{ following.followed_user.username }} ? </p>
                     <form action="{% url 'unfollow' following.id %}" method="post">
@@ -52,7 +56,21 @@
                     <a href="{% url 'followings' %}"><button class="close-modal">Non</button></a>
                 </div>
             </div>
-            <div id="block_user" class="modal-window">
+        {% endfor %}
+        {% for following in user.followed_by.all%}
+            <div id="block-user{{ following.id }}" class="modal-window">
+                <div class="modal">
+                    <p>Bloquer {{ following.user.username }} ? </p>
+                    <form action="{% url 'block_user' following.id%}" method="post">
+                        {% csrf_token %}
+                        <input class="unfollow-form" type="submit" value="Oui">
+                    </form>
+                    <a href="{% url 'followings' %}"><button class="close-modal">Non</button></a>
+                </div>
+            </div>
+        {% endfor %}
+        {% for following in user.following.all%}
+            <div id="block-user{{ following.id }}" class="modal-window">
                 <div class="modal">
                     <p>Bloquer {{ following.followed_user.username }} ? </p>
                     <form action="{% url 'block_user' following.id%}" method="post">
@@ -62,6 +80,18 @@
                     <a href="{% url 'followings' %}"><button class="close-modal">Non</button></a>
                 </div>
             </div>
-    {% endfor %}
+        {% endfor %}
+        {% for following in user.followed_by.all%}
+            <div id="delete-follow{{ following.id }}" class="modal-window">
+                <div class="modal">
+                    <p>Annuler l'abonnement de {{ following.user.username }} ? </p>
+                    <form action="{% url 'delete_follow' following.id %}" method="post">
+                        {% csrf_token %}
+                        <input class="unfollow-form" type="submit" value="Oui">
+                    </form>
+                    <a href="{% url 'followings' %}"><button class="close-modal">Non</button></a>
+                </div>
+            </div>
+        {% endfor %}
 </div>
 {% endblock %} 

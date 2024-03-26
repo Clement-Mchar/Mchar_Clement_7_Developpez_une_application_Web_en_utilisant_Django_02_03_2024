@@ -6,6 +6,7 @@ from django.http import HttpResponse, request
 from django.contrib import messages
 from .models import User, UserFollow, BlockedUser
 from .forms import FollowingForm
+from django.core.exceptions import ValidationError
 
 from . import forms
 
@@ -53,32 +54,26 @@ def logout_user(request):
 @login_required
 def follow_user(request):
     form = FollowingForm(request.POST if request.method == "POST" else None)
-    followings = UserFollow.objects.all()
-    users_blocked = BlockedUser.objects.filter(blocked_user=request.user)
-    blocked_users = BlockedUser.objects.filter(user=request.user)
-    followers_list = UserFollow.objects.filter(followed_user=request.user)
-    followings_list = UserFollow.objects.filter(user=request.user)
     if request.method == "POST":
         if form.is_valid():
-            for user_blocked in users_blocked:
-                if form.cleaned_data["username"] == user_blocked.user.username:
-                    return HttpResponse("Utilisateur introuvable")
-            for user in blocked_users:
-                if form.cleaned_data["username"] == user.blocked_user.username:
-                    return HttpResponse("Utilisateur introuvable")
-            if form.cleaned_data["username"] != request.user.username:
+            try:
+                user_to_follow = User.objects.get(username__iexact=form.cleaned_data['username'])
+            except User.DoesNotExist :
+                raise HttpResponse('cet utilisateur blabla')
+            if BlockedUser.objects.filter(user=request.user, blocked_user=user_to_follow).exists():
+                raise HttpResponse('vous ne pouvez pas ajouter utilisateur déjà bloqué')
+            if BlockedUser.objects.filter(user=user_to_follow, blocked_user=request.user).exists():
+                raise HttpResponse('CET UTILISATEUR VOUS A BLOQUÉ')
+            if user_to_follow.id == request.user.id:
+                raise HttpResponse('Ne vous ajoutez pas vous même')
+            try:
                 UserFollow.objects.create(
                     user=request.user,
-                    followed_user=(
-                        User.objects.get(username__iexact=form.cleaned_data["username"])
-                    ),
+                    followed_user=user_to_follow
                 )
-                return redirect("followings")
-            else:
-                return HttpResponse("Vous ne pouvez pas vous ajouter vous-même")
-    return render(
-        request, "app/followings.html", {"form": form, "followings": followings, "followers_list":followers_list, "followings_list":followings_list}
-    )
+            except ValidationError:
+                raise HttpResponse('vous suivez déjà cet utilisateur')
+        return redirect("followings")
 
 @login_required
 def unfollow(request, id):
@@ -86,12 +81,19 @@ def unfollow(request, id):
     if request.method == "POST":
         following.delete()
         return redirect("followings")
-
+    
+@login_required
+def delete_follow(request, id):
+    following = UserFollow.objects.get(id=id, followed_user=request.user)
+    if request.method == "POST":
+        following.delete()
+        return redirect("followings")
 
 @login_required
 def block_user(request, id):
     followed = UserFollow.objects.get(id=id, user=request.user)
     followings = UserFollow.objects.filter(followed_user=request.user)
+    #vérifier qu'on peut pas sbloquer tt seul
     if request.method == "POST":
         if followings:
             for following in followings:

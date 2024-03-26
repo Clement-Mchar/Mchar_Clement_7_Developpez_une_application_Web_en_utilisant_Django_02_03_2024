@@ -53,10 +53,8 @@ body{
                 align-items: center;
                 padding-left: 1vh;
                 padding-right: 1vh;
-                padding-top: 0.5vh;
-                padding-bottom: 0.5vh;
                 font-size: 2vh;
-                height: 5vh;
+                height: 7vh;
                 border-left: 0.2vh solid rgb(235, 235, 235);
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
                 &:hover{
@@ -78,6 +76,7 @@ body{
         max-height: 88vh;
         overflow: hidden;
         margin-top: 11vh;
+        padding-bottom: 1vh;
         h2{
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 5vh;
@@ -93,10 +92,13 @@ body{
             align-items: center;
             flex-direction: column;
             overflow: overlay;
-            height: 100%;
+            height: 90%;
             scrollbar-width: none;
             margin-left: -3vh;
             margin-right: -3vh;
+            .posts-wrapper{
+                padding: 3vh;
+            }
         }
         .publish{
             display: flex;
@@ -130,11 +132,70 @@ body{
             display: flex;
             flex-direction: column;
             border: 0.3vh solid black;
+            width: 82vh;
             height: max-content;
-            margin-top: 2.5vh;
-            margin-bottom: 2.5vh;
             padding-left: 1vh;
             padding-right: 1vh;
+            margin-top: 3vh;
+        }
+        .ticket-response{
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            height: max-content;
+            padding-left: 1vh;
+            padding-right: 1vh;
+            margin-bottom: 1vh;
+        }
+        .ticket-response-form{
+            display: flex;
+            flex-direction: column;
+            border: 0.3vh solid black;
+            border-top: none;
+            width: 82vh;
+            height: max-content;
+            padding-left: 1vh;
+            padding-right: 1vh;
+            padding-right: 1vh;
+            padding-bottom: 1vh;
+            form{
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: space-between;            
+                .form-fields{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                }
+            }
+            p{
+                display: flex;
+                flex-direction: column;
+                input[type="file"]{
+                    overflow: hidden;
+                    width: 13vh;
+                    &:active{
+                        overflow: visible;
+                        width: max-content;
+                    }
+                }
+                label{
+                    margin-bottom: 1vh;
+                }
+                #id_description{
+                    height: 30vh;
+                }
+                #id_title{
+                    height: 6vh;
+                }
+            }
+            .send{
+                align-self: flex-end;
+                width: 8vh;
+                display: flex;
+            }
         }
         .ticket-snippet{
             display: flex;
@@ -152,17 +213,29 @@ body{
                 flex-direction: row;
                 justify-content: space-between;
             }
-            .ticket-body{
+            .ticket-buttons{
                 display: flex;
-                flex-direction: column;
-                width: 20vh;
-                margin-bottom: 2.5vh;
+                flex-direction: row;
+                justify-content: space-between;
+                button{
+                    font-size: 1.5vh;
+                    max-width: 29vh;
+                    border: 0.2vh solid #000000;
+                    max-height: 3vh;
+                    min-height: 3vh;
+                    margin-right: 1vh;
+                    &:hover{
+                        background-color: rgba(255, 255, 255);
+                        cursor: pointer;
+                    }
+                }
             }
             .create-review{
                 align-self: self-end;
                 font-size: 1.5vh;
                 max-width: 29vh;
                 border: 0.2vh solid #000000;
+                border-top:none;
                 max-height: 3vh;
                 min-height: 3vh;
                 &:hover{
@@ -187,6 +260,54 @@ body{
                 flex-direction: row;
                 justify-content: space-between;
             }
+        }
+        .form{
+            display: flex;
+            flex-direction: column;
+            border: 0.3vh solid black;
+            width: 82vh;
+            height: max-content;
+            padding-left: 1vh;
+            padding-right: 1vh;
+            form{
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: space-between;            
+                .form-fields{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                }
+            }
+            p{
+                display: flex;
+                flex-direction: column;
+                input[type="file"]{
+                    overflow: hidden;
+                    width: 13vh;
+                    &:active{
+                        overflow: visible;
+                        width: max-content;
+                    }
+                }
+                label{
+                    margin-bottom: 1vh;
+                }
+                #id_description{
+                    height: 30vh;
+                }
+                #id_title{
+                    height: 6vh;
+                }
+            }
+            .send{
+                align-self: flex-end;
+                width: 8vh;
+                display: flex;
+            }
+
         }
     }
     .following-page{
@@ -232,6 +353,58 @@ body{
                     }
                 }
                 .followed-user{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border: 0.1vh solid #e1e1e1;
+                    background-color: #f1f1f1;
+                    height: 4vh;
+                    padding-left: 1vh;
+                    margin-bottom: 0.3vh;
+                    p{
+                        margin: 0vh;
+                        margin-right: 1vh;   
+                    }
+                    .followers-buttons{
+                        height: 4vh;
+                        display: flex;
+                        max-width: 30vh;
+                        a{
+                            font-family: Verdana, Geneva, Tahoma, sans-serif;
+                            height: 100%;
+                            align-items: center;
+                            display: flex;
+                            border-left: 0.3vh solid #e1e1e1;
+                            justify-content: center;
+                            padding-left: 1vh;
+                            padding-right: 1vh;
+                            &:hover{
+                                background-color: rgba(255, 255, 255);
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        .followers-list{
+            width: 100vh;
+            text-align-last: center;
+
+            .followers{
+                .follower:nth-child(even){
+                    background-color: #ffffff;
+                    .followers-buttons{
+                        a{
+                            &:hover{
+                                background-color: #f1f1f1;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+                .follower{
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
@@ -319,6 +492,46 @@ body{
                 max-height: 3vh;
                 min-height: 3vh;
                 border-radius: 3vh;
+                &:hover{
+                    background-color: rgba(255, 255, 255);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .ticket-body{
+        display: flex;
+        flex-direction: column;
+        width: 60vh;
+        margin-bottom: 2.5vh;
+        padding-bottom: 1vh;
+        padding-left: 1vh;
+        border: 0.3vh solid black;
+        img{
+            width: 20vh;
+        }
+    }
+    .review-body{
+        display: flex;
+        flex-direction: column;
+        width: 60vh;
+        margin-bottom: 2.5vh;
+        padding-bottom: 1vh;
+        padding-left: 1vh;
+        img{
+            width: 20vh;
+        }
+        .review-buttons{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            button{
+                font-size: 1.5vh;
+                max-width: 29vh;
+                border: 0.2vh solid #000000;
+                max-height: 3vh;
+                min-height: 3vh;
+                margin-right: 1vh;
                 &:hover{
                     background-color: rgba(255, 255, 255);
                     cursor: pointer;

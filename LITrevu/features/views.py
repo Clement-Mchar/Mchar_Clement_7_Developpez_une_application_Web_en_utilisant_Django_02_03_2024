@@ -6,6 +6,7 @@ from itertools import chain
 from .forms import TicketForm, ReviewForm
 from .models import Ticket, Review
 from authentication.models import User, UserFollow
+from authentication.forms import FollowingForm
 
 # Create your views here.
 
@@ -35,7 +36,9 @@ def create_review(request):
 @login_required
 def ticket_response(request, id):
     ticket = Ticket.objects.get(id=id)
-    form = ReviewForm(request.POST if request.method == "POST" else None)
+    form = ReviewForm(
+        request.POST if request.method == "POST" else None,
+        request.FILES if request.method == "POST" else None,)
     if request.method == "POST":
         if form.is_valid():
             review = form.save(commit=False)
@@ -113,7 +116,8 @@ def flux(request):
 
 @login_required
 def followings(request):
-    return render(request, "app/followings.html")
+    form = FollowingForm(request.POST if request.method == "POST" else None)
+    return render(request, "app/followings.html", {"form":form})
 
 
 @login_required

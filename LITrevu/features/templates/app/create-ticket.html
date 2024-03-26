@@ -2,12 +2,20 @@
 {% block title %}LITrevu{% endblock %}
 {% block content %}
 <h2>Demander une critique</h2>
-{% if form.errors %}
-    {{ form.errors }}
-{% endif %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Envoyer">
-</form>
+<div class="posts-container">
+    {% for field in form %}
+        {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
+    {% endfor %}
+    <div class="form">
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-fields">
+            {{ form.as_p }}
+        </div>
+        <input class="send" type="submit" value="Envoyer">
+        </form>
+    </div>
+</div>
 {% endblock %} 
