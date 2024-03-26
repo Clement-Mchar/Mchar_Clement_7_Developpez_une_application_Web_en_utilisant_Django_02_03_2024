@@ -22,7 +22,7 @@ def sign(request):
         )
         if user is not None:
             login(request, user)
-            messages.success(request, "bravo chakal")
+            messages.success(request, f"vous êtes connecté en tant que {request.user.username}")
             return redirect(settings.LOGIN_REDIRECT_URL)
         else:
             messages.error(request, "Identifiants invalides")
@@ -56,6 +56,8 @@ def follow_user(request):
     followings = UserFollow.objects.all()
     users_blocked = BlockedUser.objects.filter(blocked_user=request.user)
     blocked_users = BlockedUser.objects.filter(user=request.user)
+    followers_list = UserFollow.objects.filter(followed_user=request.user)
+    followings_list = UserFollow.objects.filter(user=request.user)
     if request.method == "POST":
         if form.is_valid():
             for user_blocked in users_blocked:
@@ -75,9 +77,8 @@ def follow_user(request):
             else:
                 return HttpResponse("Vous ne pouvez pas vous ajouter vous-même")
     return render(
-        request, "app/followings.html", {"form": form, "followings": followings}
+        request, "app/followings.html", {"form": form, "followings": followings, "followers_list":followers_list, "followings_list":followings_list}
     )
-
 
 @login_required
 def unfollow(request, id):

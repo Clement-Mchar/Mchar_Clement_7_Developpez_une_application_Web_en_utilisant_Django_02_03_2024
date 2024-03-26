@@ -16,7 +16,7 @@
     <section>
         <div class="logo">
             {% block logo %}
-            <img src="../../static/app/images/LITrevu.png" alt="">
+            <a href="sign"><img src="../../static/app/images/LITrevu.png" alt=""></a>
             {% endblock %}
         </div>
         {% if messages %}
@@ -25,11 +25,11 @@
         {% endfor %}
         {% endif %}
         {% block content %}
-
-        {% endblock %}
         {% if user.is_authenticated %}
-            <p>Vous êtes connecté en tant que {{ request.user }}. <a href="{% url 'logout' %}">Se déconnecter</a></p>
+        <a href="{% url 'logout' %}">Se déconnecter</a></p>
         {% endif %}
+        {% endblock %}
+
     </section>
 </body>
 </html>

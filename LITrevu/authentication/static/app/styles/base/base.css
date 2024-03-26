@@ -8,9 +8,24 @@ body {
   display: flex;
   flex-flow: row-reverse;
 }
+body p {
+  padding: 1vh;
+  margin: 1vh;
+}
 body h1 {
   font-family: "Courier New", Courier, monospace;
   font-size: 5vh;
+}
+body input {
+  height: 4vh;
+  border-radius: 1vh;
+  border: none;
+  font-size: 2vh;
+  margin: 0vh;
+  padding: 0.3vh;
+}
+body button {
+  margin: 1.1vh;
 }
 body section {
   display: flex;

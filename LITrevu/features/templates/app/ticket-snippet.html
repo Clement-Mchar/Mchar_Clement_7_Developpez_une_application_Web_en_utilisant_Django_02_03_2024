@@ -15,22 +15,22 @@
         {% if post.image %}
             <img src='{{ post.image.url }}'>
         {% endif %}
-        <button><a href="{% url 'ticket_response' post.id %}">Créer une critique</a></button>
     </div>
     {% if post.user == request.user %}
         <a href="{% url 'update_ticket' post.id %}">Modifier</a>
-        <a href="#modal-window">Supprimer</a>
-        <div id="modal-window">
+        <a href="#modal-ticket">Supprimer</a>
+        <div id="modal-ticket" class="modal-window">
             <div class="modal">
                 <p>Voulez vous supprimer ce ticket ? </p>
                 <form action="{% url 'delete_ticket' post.id %}" method="post">
                     {% csrf_token %}
                     <input class="delete-form" type="submit" value="Oui">
                 </form>
-                <button class="close-modal">Non</button>
+                <a href="{% url 'ticket' post.id %}"><button class="close-modal">Non</button></a>
             </div>
         </div>
     {% endif %}
+    <button class="create-review"><a href="{% url 'ticket_response' post.id %}">Créer une critique</a></button>
 </div>
 
 

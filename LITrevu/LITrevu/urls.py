@@ -33,11 +33,15 @@ urlpatterns = [
     path("posts/create_ticket", features_views.create_ticket, name="create_ticket"),
     path("posts/", features_views.user_posts, name="user_posts"),
     path("followings", views.follow_user, name="followings"),
+    path("followings#unfollow", views.follow_user, name="unfollow_modal"),
+    path("followings#block_user", views.follow_user, name="block_modal"),
     path("ticket/<id>/", features_views.ticket, name="ticket"),
+    path("ticket/<id>/#modal-ticket", features_views.ticket, name="ticket_modal"),
     path(
         "ticket_response/<id>/", features_views.ticket_response, name="ticket_response"
     ),
-    path("review/<id>/", features_views.review, name="review"),
+    path("review/<id>/#modal-review", features_views.review, name="review"),
+    path("review/<id>/", features_views.review, name="review_modal"),
     path("edit_ticket/<id>/", features_views.update_ticket, name="update_ticket"),
     path("edit_review/<id>/", features_views.update_review, name="update_review"),
     path("delete_ticket/<id>", features_views.delete_ticket, name="delete_ticket"),

@@ -22,15 +22,15 @@
             </div>
         {% if post.user == request.user %}
             <a href="{% url 'update_review' post.id %}">Modifier</a>
-            <a href="#modal-window">Supprimer</a>
-            <div id="modal-window">
+            <a href="#modal-review">Supprimer</a>
+            <div id="modal-review" class="modal-window">
                 <div class="modal">
                     <p>Voulez vous supprimer ce ticket ? </p>
                     <form action="{% url 'delete_review' post.id %}" method="post">
                         {% csrf_token %}
                         <input class="delete-form" type="submit" value="Oui">
                     </form>
-                    <button class="close-modal">Non</button>
+                    <a href="{% url 'review' post.id %}"><button class="close-modal">Non</button></a>
                 </div>
             </div>
         {% endif %}

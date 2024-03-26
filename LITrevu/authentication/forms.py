@@ -6,20 +6,27 @@ from django.core.exceptions import ValidationError
 
 
 class SignupForm(UserCreationForm):
+    username = forms.CharField(max_length=63, label="", widget=forms.TextInput(attrs={'placeholder': "Nom d'utilisateur", 'class':"signup-form"}))
+    password1 = forms.CharField(
+        max_length=63, label="", widget=forms.PasswordInput(attrs={'placeholder': "Mot de passe", 'class':"signup-form"})
+    )
+    password2 = forms.CharField(
+        max_length=63, label="", widget=forms.PasswordInput(attrs={'placeholder': "Confirmez le mot de passe", 'class':"signup-form"})
+    )
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ["username"]
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=63, label="Nom d’utilisateur")
+    username = forms.CharField(max_length=63, label="", widget=forms.TextInput(attrs={'placeholder': "Nom d'utilisateur", 'class':"login-form"}))
     password = forms.CharField(
-        max_length=63, widget=forms.PasswordInput, label="Mot de passe"
+        max_length=63, label="", widget=forms.PasswordInput(attrs={'placeholder': "Mot de passe", 'class':"login-form"})
     )
 
 
 class FollowingForm(forms.Form):
-    username = forms.CharField(max_length=100, label="nom d'utilisateur")
+    username = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder': "Entrez un nom d'utilisateur..."}))
 
     def clean_username(self):
         data = self.cleaned_data["username"]
