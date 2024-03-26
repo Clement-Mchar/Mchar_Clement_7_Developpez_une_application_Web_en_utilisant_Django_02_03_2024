@@ -1,0 +1,33 @@
+{% load static %}
+{% load compress %}
+{% compress css %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LITRevu{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% endcompress %}
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'flux' %}">LITRevu</a></h1>
+        <nav>
+            <a href="{% url 'flux' %}">Flux</a>
+            <a href="{% url 'user_posts' %}">Vos Posts</a>
+            <a href="{% url 'followings' %}">Abonnements</a>
+            <a href="{% url 'logout' %}">Se déconnecter</a>
+        </nav>
+    </header>
+    <section>
+        {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+    </section>
+</body>
+</html>

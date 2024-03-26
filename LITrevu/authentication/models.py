@@ -1,44 +1,64 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
+import uuid
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
-
 from django.conf import settings
 from django.db import models
 from .managers import UserManager
+
 # Create your models here.
 
+
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=40, unique=True)
-    is_active = models.BooleanField(('active'), default=True)
-    is_staff = models.BooleanField(('staff'), default=False)
-    is_superuser = models.BooleanField(('superuser'), default=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    username = models.CharField(
+        max_length=40, unique=True, verbose_name="Nom d'utilisateur"
+    )
+    is_active = models.BooleanField(("active"), default=True)
+    is_staff = models.BooleanField(("staff"), default=False)
+    is_superuser = models.BooleanField(("superuser"), default=False)
     USERNAME_FIELD = "username"
 
     objects = UserManager()
+
     class Meta:
-        db_table = 'auth_user'
-        
-'''class Ticket(models.Model):
-    # Your Ticket model definition goes here
-    pass
+        db_table = "auth_user"
 
 
-class Review(models.Model):
-    ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
-    rating = models.PositiveSmallIntegerField(
-        # validates that rating must be between 0 and 5
-        validators=[MinValueValidator(0), MaxValueValidator(5)])
-    headline = models.CharField(max_length=128)
-    body = models.CharField(max_length=8192, blank=True)
+class UserFollow(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    time_created = models.DateTimeField(auto_now_add=True)
-
-
-class UserFollows(models.Model):
-    # Your UserFollows model definition goes here
+        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="following"
+    )
+    followed_user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="followed_by",
+    )
 
     class Meta:
         # ensures we don't get multiple UserFollows instances
         # for unique user-user_followed pairs
-        unique_together = ('user', 'followed_user', )'''
+        unique_together = (
+            "user",
+            "followed_user",
+        )
+
+
+class BlockedUser(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="blocker"
+    )
+    blocked_user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="blocked_user",
+    )
+
+    class Meta:
+        # ensures we don't get multiple UserFollows instances
+        # for unique user-user_followed pairs
+        unique_together = (
+            "user",
+            "blocked_user",
+        )

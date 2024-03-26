@@ -1,4 +1,4 @@
-{% extends "app/base.html" %}
+{% extends "app/authentication-base.html" %}
 
 {% block title %}Litrevu | Login{% endblock %}
 
@@ -14,6 +14,7 @@
             {{ form.as_p}}
             {% csrf_token %}
             <button type="submit">S'inscrire</button>
+            <button onclick="window.location='sign'">Retour</button>
         </form>
     </div>
 </div>

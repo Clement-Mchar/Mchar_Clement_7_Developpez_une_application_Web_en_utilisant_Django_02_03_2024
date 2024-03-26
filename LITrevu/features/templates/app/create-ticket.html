@@ -1,0 +1,13 @@
+{% extends "templates/app/website-base.html" %}
+{% block title %}LITrevu{% endblock %}
+{% block content %}
+<h2>Demander une critique</h2>
+{% if form.errors %}
+    {{ form.errors }}
+{% endif %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Envoyer">
+</form>
+{% endblock %} 

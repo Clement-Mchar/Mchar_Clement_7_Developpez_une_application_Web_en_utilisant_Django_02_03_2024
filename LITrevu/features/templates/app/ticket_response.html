@@ -1,0 +1,20 @@
+{% extends "templates/app/website-base.html" %}
+{% block title %}LITrevu{% endblock %}
+{% block content %}
+<h2>Créer une critique</h2>
+{% if form.errors %}
+        {{ form.errors }}
+{% endif %}
+<h3>Vous êtes en train de poster en réponse à</h3>
+<div class="review-ticket">
+    <a href="{% url 'ticket_response' ticket.id %}">
+    <p>Ticket - {{ ticket.user }}</p>
+    <p>{{ ticket.title }}</p>
+    <p>{{ ticket.description }}</p> 
+</div>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Envoyer">
+</form>
+{% endblock %} 

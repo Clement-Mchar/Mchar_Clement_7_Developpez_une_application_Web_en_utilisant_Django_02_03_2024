@@ -1,11 +1,12 @@
 from django.contrib.auth.base_user import BaseUserManager
 
+
 class UserManager(BaseUserManager):
 
     def create_user(self, username, password=None):
 
         if username is None:
-            raise TypeError('Users must have a username.')
+            raise TypeError("Users must have a username.")
 
         user = self.model(username=username)
         user.set_password(password)
@@ -16,7 +17,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, username, password):
 
         if password is None:
-            raise TypeError('Superusers must have a password.')
+            raise TypeError("Superusers must have a password.")
 
         user = self.create_user(username, password)
         user.is_superuser = True

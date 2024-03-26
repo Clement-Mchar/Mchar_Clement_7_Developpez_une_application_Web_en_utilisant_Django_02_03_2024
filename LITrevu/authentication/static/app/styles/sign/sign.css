@@ -1,0 +1,73 @@
+.placeholder {
+  height: 18vh;
+}
+
+.connexion {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 110vh;
+  align-self: center;
+}
+.connexion .sign-up {
+  display: flex;
+  flex-direction: column;
+}
+.connexion .sign-up h1 {
+  padding-bottom: 8vh;
+}
+.connexion .sign-up button {
+  width: 16vh;
+  font-size: 3vh;
+  max-width: 16vh;
+  padding: 0.1vh;
+  border: none;
+  max-height: 5vh;
+  min-height: 5vh;
+  align-self: center;
+  border-radius: 3vh;
+  background-color: rgba(234, 236, 236, 0.8);
+  text-decoration: none;
+}
+.connexion .sign-up button:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.connexion .sign-up button a {
+  text-decoration: none;
+  color: black;
+}
+.connexion .login {
+  display: flex;
+  flex-direction: column;
+}
+.connexion .login button {
+  align-self: flex-end;
+  width: 21vh;
+  font-size: 3vh;
+  max-width: 29vh;
+  padding: 0.1vh;
+  margin-left: 4vh;
+  border: none;
+  max-height: 5vh;
+  min-height: 5vh;
+  border-radius: 3vh;
+  background-color: rgba(234, 236, 236, 0.8);
+}
+.connexion .login button:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.connexion .login input {
+  font-size: 3vh;
+}
+.connexion .login input:focus-visible {
+  outline: 0.1vh solid black;
+}
+
+h1 {
+  padding: 0vh;
+  margin: 0vh;
+}
+
+/*# sourceMappingURL=sign.css.map */
