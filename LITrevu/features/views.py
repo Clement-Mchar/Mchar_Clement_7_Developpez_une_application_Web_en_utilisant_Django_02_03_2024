@@ -157,7 +157,7 @@ def update_ticket(request, id):
         ticket.time_created = datetime.now()
         ticket_form.save()
         return redirect("user_posts")
-    return render(request, "app/update-post.html", {"form": ticket_form})
+    return render(request, "app/update-ticket.html", {"form": ticket_form, "ticket":ticket})
 
 
 @login_required
@@ -168,7 +168,7 @@ def update_review(request, id):
         request.FILES if request.FILES else None,
         instance=review,
     )
-    return render(request, "app/update-post.html", {"form": review_form})
+    return render(request, "app/update-review.html", {"form": review_form, "review":review})
 
 
 @login_required

@@ -3,6 +3,16 @@ a {
   color: black;
 }
 
+textarea {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2vh;
+}
+
+input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2vh;
+}
+
 h2 {
   text-align: center;
 }
@@ -17,6 +27,12 @@ h1 {
 h1 a {
   text-decoration: none;
   color: black;
+}
+
+#id_rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .messages {
@@ -318,8 +334,9 @@ body section .form {
   border: 0.3vh solid black;
   width: 76vh;
   height: max-content;
-  padding-left: 8vh;
   padding-right: 1vh;
+  padding-left: 1vh;
+  margin-bottom: 1vh;
 }
 body section .form form {
   width: 90%;
@@ -347,6 +364,9 @@ body section .form form .form-fields input[type=file]::file-selector-button:hove
   background-color: #ffffff;
   cursor: pointer;
 }
+body section .form form .form-fields p input[type=checkbox] {
+  display: none;
+}
 body section .form p {
   display: flex;
   flex-direction: column;
@@ -355,7 +375,7 @@ body section .form p input[type=file] {
   overflow: hidden;
   width: 13vh;
 }
-body section .form p input[type=file]:active {
+body section .form p input[type=file]:focus-within {
   overflow: visible;
   width: max-content;
 }

@@ -26,7 +26,7 @@ class Review(models.Model):
     headline = models.CharField(max_length=128, verbose_name="Titre")
     rating = models.PositiveSmallIntegerField(
         # validates that rating must be between 0 and 5
-        validators=[MinValueValidator(0), MaxValueValidator(5)]
+        validators=[MinValueValidator(0), MaxValueValidator(5)], verbose_name="Note"
     )
     body = models.TextField(blank=True, verbose_name="Corps du message")
     user = models.ForeignKey(

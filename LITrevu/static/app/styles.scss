@@ -2,6 +2,14 @@ a{
     text-decoration: none;
     color: black;
 }
+textarea{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2vh;
+}
+input{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2vh;
+}
 h2{
     text-align: center;
 }
@@ -15,6 +23,11 @@ h1{
         text-decoration: none;
         color: black;
     }
+}
+#id_rating{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .messages {
     background-color: #ffffff;
@@ -208,6 +221,7 @@ body{
                     flex-direction: column;
                     width: 100%;
                 }
+
             }
             p{
                 display: flex;
@@ -317,8 +331,9 @@ body{
             border: 0.3vh solid black;
             width: 76vh;
             height: max-content;
-            padding-left: 8vh;
             padding-right: 1vh;
+            padding-left: 1vh;
+            margin-bottom: 1vh;
             form{
                 width: 90%;
                 display: flex;
@@ -343,6 +358,11 @@ body{
                             cursor: pointer;
                         }
                     }
+                    p{
+                        input[type="checkbox"]{
+                            display: none;
+                        }
+                    }
                 }
             }
             p{
@@ -351,7 +371,7 @@ body{
                 input[type="file"]{
                     overflow: hidden;
                     width: 13vh;
-                    &:active{
+                    &:focus-within{
                         overflow: visible;
                         width: max-content;
                     }

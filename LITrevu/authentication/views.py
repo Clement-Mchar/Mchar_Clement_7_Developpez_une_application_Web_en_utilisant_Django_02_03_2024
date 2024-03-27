@@ -62,6 +62,7 @@ def follow_user(request):
                 )
             except User.DoesNotExist:
                 messages.error(request, "Cet utilisateur n'existe pas")
+                print(request.user.id)
                 return redirect("followings")
             if BlockedUser.objects.filter(
                 user=request.user, blocked_user=user_to_follow
@@ -106,17 +107,17 @@ def delete_follow(request, id):
 def block_user(request, id):
     followed = UserFollow.objects.get(id=id, user=request.user)
     followings = UserFollow.objects.filter(followed_user=request.user)
-    # vérifier qu'on peut pas sbloquer tt seul
     if request.method == "POST":
         if followings:
             for following in followings:
                 if following.user == followed.followed_user:
                     following.delete()
-        followed.delete()
-        BlockedUser.objects.create(
-            user=request.user,
-            blocked_user=User.objects.get(
-                username__iexact=followed.followed_user
-            ),
-        )
+        if followed.followed_user != request.user:
+            followed.delete()
+            BlockedUser.objects.create(
+                user=request.user,
+                blocked_user=User.objects.get(
+                    username__iexact=followed.followed_user
+                ),
+            )
         return redirect("followings")

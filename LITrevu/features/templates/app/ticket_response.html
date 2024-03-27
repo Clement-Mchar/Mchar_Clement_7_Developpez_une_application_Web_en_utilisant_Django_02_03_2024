@@ -10,6 +10,7 @@
             <p>Vous êtes en train de poster en réponse à</p>
             <div class="ticket-body">
                 <a href="{% url 'ticket_response' ticket.id %}">
+
                     <div class="ticket-response-header">
                         <p>{{ ticket.user }} a demandé une critique</p>
                         <p>{{ ticket.time_created }}</p>
