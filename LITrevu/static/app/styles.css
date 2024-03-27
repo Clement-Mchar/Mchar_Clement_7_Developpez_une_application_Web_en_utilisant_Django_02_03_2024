@@ -7,6 +7,18 @@ h2 {
   text-align: center;
 }
 
+h1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  padding-left: 2vh;
+  flex: 1.2;
+  font-size: 4vh;
+}
+h1 a {
+  text-decoration: none;
+  color: black;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -32,17 +44,6 @@ body header {
   height: 7vh;
   margin-bottom: 3vh;
   position: fixed;
-}
-body header h1 {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: bold;
-  padding-left: 2vh;
-  flex: 1.2;
-  font-size: 4vh;
-}
-body header h1 a {
-  text-decoration: none;
-  color: black;
 }
 body header nav {
   width: 58vh;
@@ -79,6 +80,24 @@ body section {
   margin-top: 11vh;
   padding-bottom: 1vh;
 }
+body section .send {
+  align-self: flex-end;
+  width: 8vh;
+  display: flex;
+  font-size: 1.5vh;
+  max-width: 29vh;
+  border: 0.2vh solid #000000;
+  text-decoration: none;
+  background-color: rgb(243, 243, 243);
+  max-height: 3vh;
+  min-height: 3vh;
+  margin-right: 1vh;
+  place-content: center;
+}
+body section .send:hover {
+  background-color: #ffffff;
+  cursor: pointer;
+}
 body section h2 {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 5vh;
@@ -98,6 +117,7 @@ body section .posts-container {
   scrollbar-width: none;
   margin-left: -3vh;
   margin-right: -3vh;
+  padding-top: 1vh;
 }
 body section .posts-container .posts-wrapper {
   padding: 3vh;
@@ -211,6 +231,17 @@ body section .ticket-snippet {
   padding-right: 1vh;
   padding-bottom: 1vh;
 }
+body section .ticket-snippet .main-ticket-body {
+  display: flex;
+  flex-direction: column;
+  width: 60vh;
+  margin-bottom: 2.5vh;
+  padding-bottom: 1vh;
+  padding-left: 1vh;
+}
+body section .ticket-snippet .main-ticket-body img {
+  width: 20vh;
+}
 body section .ticket-snippet .ticket-header {
   display: flex;
   flex-direction: row;
@@ -266,9 +297,9 @@ body section .form {
   display: flex;
   flex-direction: column;
   border: 0.3vh solid black;
-  width: 82vh;
+  width: 76vh;
   height: max-content;
-  padding-left: 1vh;
+  padding-left: 8vh;
   padding-right: 1vh;
 }
 body section .form form {
@@ -282,6 +313,20 @@ body section .form form .form-fields {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+body section .form form .form-fields input[type=file]::file-selector-button {
+  font-size: 1.5vh;
+  max-width: 29vh;
+  border: 0.2vh solid #000000;
+  text-decoration: none;
+  background-color: rgb(243, 243, 243);
+  max-height: 3vh;
+  min-height: 3vh;
+  margin-right: 1vh;
+}
+body section .form form .form-fields input[type=file]::file-selector-button:hover {
+  background-color: #ffffff;
+  cursor: pointer;
 }
 body section .form p {
   display: flex;
@@ -302,12 +347,7 @@ body section .form p #id_description {
   height: 30vh;
 }
 body section .form p #id_title {
-  height: 6vh;
-}
-body section .form .send {
-  align-self: flex-end;
-  width: 8vh;
-  display: flex;
+  height: 5vh;
 }
 body .following-page {
   display: flex;

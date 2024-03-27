@@ -4,7 +4,7 @@
             {% if post.user == request.user %}
                 <p>Vous avez publié une critique</p>
             {% else %}
-                <p>{{ post.user }} a publié une critique </p>
+                <p>{{ post.user }} a publié une critique</p>
             {% endif %}
             <p>{{ post.time_created }}</p>
         </div>
@@ -13,33 +13,35 @@
         <p>{{ post.headline }}</p>
         <p>{{ post.rating }}</p>
         <p>{{ post.body }}</p>
-        
-            <div class="ticket-body">
-                <a href="{% url 'ticket' post.ticket.id %}">
-                    <p>Ticket - {{ post.ticket.user }}</p>
-                    <p>{{ post.ticket.title }}</p>
-                    <p>{{ post.ticket.description }}</p>
-                    {% if post.ticket.image %}
-                        <img src='{{ post.ticket.image.url }}'>
-                    {% endif %}
-                </a>
-            </div>
+        <div class="ticket-body">
+            <a href="{% url 'ticket' post.ticket.id %}">
+                <p>Ticket - {{ post.ticket.user }}</p>
+                <p>{{ post.ticket.title }}</p>
+                <p>{{ post.ticket.description }}</p>
+                {% if post.ticket.image %}<img src='{{ post.ticket.image.url }}'>{% endif %}
+            </a>
+        </div>
         {% if post.user == request.user %}
             <div class="review-buttons">
                 <div class="user-actions">
-                    <button><a href="{% url 'update_review' post.id %}">Modifier</a></button>
-                    <button><a href="#modal-review">Supprimer</a></button>
+                    <button>
+                        <a href="{% url 'update_review' post.id %}">Modifier</a>
+                    </button>
+                    <button>
+                        <a href="#modal-review">Supprimer</a>
+                    </button>
                 </div>
             </div>
-
             <div id="modal-review" class="modal-window">
                 <div class="modal">
-                    <p>Voulez vous supprimer ce ticket ? </p>
+                    <p>Voulez vous supprimer ce ticket ?</p>
                     <form action="{% url 'delete_review' post.id %}" method="post">
                         {% csrf_token %}
                         <input class="delete-form" type="submit" value="Oui">
                     </form>
-                    <a href="{% url 'review' post.id %}"><button class="close-modal">Non</button></a>
+                    <a href="{% url 'review' post.id %}">
+                        <button class="close-modal">Non</button>
+                    </a>
                 </div>
             </div>
         {% endif %}

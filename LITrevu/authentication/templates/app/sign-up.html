@@ -1,21 +1,17 @@
 {% extends "app/authentication-base.html" %}
-
 {% block title %}Litrevu | Login{% endblock %}
-
 {% block content %}
-<div class="sign-up-placeholder"></div>
-<div class="sign-up-bloc">
-    <div class="sign-up-form">
-        <h1>Inscription</h1>
-        {% if form.errors %}
-        {{ form.errors }}
-        {% endif %}
-        <form method="post">
-            {{ form.as_p}}
-            {% csrf_token %}
-            <button type="submit">S'inscrire</button>
-            <button onclick="window.location='sign'">Retour</button>
-        </form>
+    <div class="sign-up-placeholder"></div>
+    <div class="sign-up-bloc">
+        <div class="sign-up-form">
+            <h1>Inscription</h1>
+            {% if form.errors %}{{ form.errors }}{% endif %}
+            <form method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button type="submit">S'inscrire</button>
+                <button onclick="window.location='sign'">Retour</button>
+            </form>
+        </div>
     </div>
-</div>
 {% endblock content %}

@@ -5,6 +5,17 @@ a{
 h2{
     text-align: center;
 }
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    padding-left: 2vh;
+    flex: 1.2;
+    font-size: 4vh;
+    a{
+        text-decoration: none;
+        color: black;
+    }
+}
 body{
     display: flex;
     flex-direction: column;
@@ -29,17 +40,6 @@ body{
         height: 7vh;
         margin-bottom: 3vh;
         position: fixed;
-        h1{
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            font-weight: bold;
-            padding-left: 2vh;
-            flex: 1.2;
-            font-size: 4vh;
-            a{
-                text-decoration: none;
-                color: black;
-            }
-        }
         nav{
             width: 58vh;
             height: 100%;
@@ -77,6 +77,25 @@ body{
         overflow: hidden;
         margin-top: 11vh;
         padding-bottom: 1vh;
+        .send{
+            align-self: flex-end;
+            width: 8vh;
+            display: flex;
+            font-size: 1.5vh;
+            max-width: 29vh;
+            border: 0.2vh solid #000000;
+            text-decoration: none;
+
+            background-color: rgb(243, 243, 243);
+            max-height: 3vh;
+            min-height: 3vh;
+            margin-right: 1vh;
+            place-content: center;
+            &:hover{
+                background-color: #ffffff;
+                cursor: pointer;
+            }
+        }
         h2{
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 5vh;
@@ -96,6 +115,7 @@ body{
             scrollbar-width: none;
             margin-left: -3vh;
             margin-right: -3vh;
+            padding-top: 1vh;
             .posts-wrapper{
                 padding: 3vh;
             }
@@ -208,6 +228,17 @@ body{
             padding-left: 1vh;
             padding-right: 1vh;
             padding-bottom: 1vh;
+            .main-ticket-body{
+                display: flex;
+                flex-direction: column;
+                width: 60vh;
+                margin-bottom: 2.5vh;
+                padding-bottom: 1vh;
+                padding-left: 1vh;
+                img{
+                    width: 20vh;
+                }
+            }
             .ticket-header{
                 display: flex;
                 flex-direction: row;
@@ -265,9 +296,9 @@ body{
             display: flex;
             flex-direction: column;
             border: 0.3vh solid black;
-            width: 82vh;
+            width: 76vh;
             height: max-content;
-            padding-left: 1vh;
+            padding-left: 8vh;
             padding-right: 1vh;
             form{
                 width: 90%;
@@ -279,6 +310,20 @@ body{
                     display: flex;
                     flex-direction: column;
                     width: 100%;
+                    input[type="file"]::file-selector-button{
+                        font-size: 1.5vh;
+                        max-width: 29vh;
+                        border: 0.2vh solid #000000;
+                        text-decoration: none;
+                        background-color: rgb(243, 243, 243);
+                        max-height: 3vh;
+                        min-height: 3vh;
+                        margin-right: 1vh;
+                        &:hover{
+                            background-color: #ffffff;
+                            cursor: pointer;
+                        }
+                    }
                 }
             }
             p{
@@ -299,14 +344,10 @@ body{
                     height: 30vh;
                 }
                 #id_title{
-                    height: 6vh;
+                    height: 5vh;
                 }
             }
-            .send{
-                align-self: flex-end;
-                width: 8vh;
-                display: flex;
-            }
+
 
         }
     }

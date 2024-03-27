@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, request
+from django.http import HttpResponse
 from django.contrib import messages
 from .models import User, UserFollow, BlockedUser
 from .forms import FollowingForm
@@ -23,7 +23,10 @@ def sign(request):
         )
         if user is not None:
             login(request, user)
-            messages.success(request, f"vous êtes connecté en tant que {request.user.username}")
+            messages.success(
+                request,
+                f"vous êtes connecté en tant que {request.user.username}",
+            )
             return redirect(settings.LOGIN_REDIRECT_URL)
         else:
             messages.error(request, "Identifiants invalides")
@@ -57,23 +60,31 @@ def follow_user(request):
     if request.method == "POST":
         if form.is_valid():
             try:
-                user_to_follow = User.objects.get(username__iexact=form.cleaned_data['username'])
-            except User.DoesNotExist :
-                raise HttpResponse('cet utilisateur blabla')
-            if BlockedUser.objects.filter(user=request.user, blocked_user=user_to_follow).exists():
-                raise HttpResponse('vous ne pouvez pas ajouter utilisateur déjà bloqué')
-            if BlockedUser.objects.filter(user=user_to_follow, blocked_user=request.user).exists():
-                raise HttpResponse('CET UTILISATEUR VOUS A BLOQUÉ')
+                user_to_follow = User.objects.get(
+                    username__iexact=form.cleaned_data["username"]
+                )
+            except User.DoesNotExist:
+                raise HttpResponse("cet utilisateur blabla")
+            if BlockedUser.objects.filter(
+                user=request.user, blocked_user=user_to_follow
+            ).exists():
+                raise HttpResponse(
+                    "vous ne pouvez pas ajouter utilisateur déjà bloqué"
+                )
+            if BlockedUser.objects.filter(
+                user=user_to_follow, blocked_user=request.user
+            ).exists():
+                raise HttpResponse("CET UTILISATEUR VOUS A BLOQUÉ")
             if user_to_follow.id == request.user.id:
-                raise HttpResponse('Ne vous ajoutez pas vous même')
+                raise HttpResponse("Ne vous ajoutez pas vous même")
             try:
                 UserFollow.objects.create(
-                    user=request.user,
-                    followed_user=user_to_follow
+                    user=request.user, followed_user=user_to_follow
                 )
             except ValidationError:
-                raise HttpResponse('vous suivez déjà cet utilisateur')
+                raise HttpResponse("vous suivez déjà cet utilisateur")
         return redirect("followings")
+
 
 @login_required
 def unfollow(request, id):
@@ -81,7 +92,8 @@ def unfollow(request, id):
     if request.method == "POST":
         following.delete()
         return redirect("followings")
-    
+
+
 @login_required
 def delete_follow(request, id):
     following = UserFollow.objects.get(id=id, followed_user=request.user)
@@ -89,11 +101,12 @@ def delete_follow(request, id):
         following.delete()
         return redirect("followings")
 
+
 @login_required
 def block_user(request, id):
     followed = UserFollow.objects.get(id=id, user=request.user)
     followings = UserFollow.objects.filter(followed_user=request.user)
-    #vérifier qu'on peut pas sbloquer tt seul
+    # vérifier qu'on peut pas sbloquer tt seul
     if request.method == "POST":
         if followings:
             for following in followings:
@@ -102,6 +115,8 @@ def block_user(request, id):
         followed.delete()
         BlockedUser.objects.create(
             user=request.user,
-            blocked_user=User.objects.get(username__iexact=followed.followed_user),
+            blocked_user=User.objects.get(
+                username__iexact=followed.followed_user
+            ),
         )
         return redirect("followings")

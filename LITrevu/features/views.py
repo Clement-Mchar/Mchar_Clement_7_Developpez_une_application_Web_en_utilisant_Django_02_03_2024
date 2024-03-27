@@ -5,7 +5,7 @@ from django.db.models import CharField, Value
 from itertools import chain
 from .forms import TicketForm, ReviewForm
 from .models import Ticket, Review
-from authentication.models import User, UserFollow
+from authentication.models import UserFollow
 from authentication.forms import FollowingForm
 
 # Create your views here.
@@ -29,7 +29,9 @@ def create_review(request):
             review.save()
             return redirect("user_posts")
     return render(
-        request, "app/create-review.html", context={"form1": form1, "form2": form2}
+        request,
+        "app/create-review.html",
+        context={"form1": form1, "form2": form2},
     )
 
 
@@ -38,7 +40,8 @@ def ticket_response(request, id):
     ticket = Ticket.objects.get(id=id)
     form = ReviewForm(
         request.POST if request.method == "POST" else None,
-        request.FILES if request.method == "POST" else None,)
+        request.FILES if request.method == "POST" else None,
+    )
     if request.method == "POST":
         if form.is_valid():
             review = form.save(commit=False)
@@ -47,7 +50,9 @@ def ticket_response(request, id):
             review.save()
             return redirect("user_posts")
     return render(
-        request, "app/ticket_response.html", context={"form": form, "ticket": ticket}
+        request,
+        "app/ticket_response.html",
+        context={"form": form, "ticket": ticket},
     )
 
 
@@ -74,7 +79,9 @@ def user_posts(request):
     reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
     tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
     posts = sorted(
-        chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
+        reverse=True,
     )
 
     return render(request, "app/user-posts.html", context={"posts": posts})
@@ -90,8 +97,12 @@ def flux(request):
         tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
         user_tickets = Ticket.objects.filter(user=request.user)
         user_reviews = Review.objects.filter(user=request.user)
-        user_reviews = user_reviews.annotate(content_type=Value("REVIEW", CharField()))
-        user_tickets = user_tickets.annotate(content_type=Value("TICKET", CharField()))
+        user_reviews = user_reviews.annotate(
+            content_type=Value("REVIEW", CharField())
+        )
+        user_tickets = user_tickets.annotate(
+            content_type=Value("TICKET", CharField())
+        )
         all_reviews = sorted(
             chain(reviews, user_reviews),
             key=lambda post: post.time_created,
@@ -108,7 +119,9 @@ def flux(request):
             reverse=True,
         )
         return render(
-            request, "app/flux.html", context={"posts": posts, "followings": followings}
+            request,
+            "app/flux.html",
+            context={"posts": posts, "followings": followings},
         )
     else:
         return render(request, "app/flux.html")
@@ -117,7 +130,7 @@ def flux(request):
 @login_required
 def followings(request):
     form = FollowingForm(request.POST if request.method == "POST" else None)
-    return render(request, "app/followings.html", {"form":form})
+    return render(request, "app/followings.html", {"form": form})
 
 
 @login_required

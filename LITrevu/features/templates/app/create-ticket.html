@@ -1,21 +1,17 @@
 {% extends "templates/app/website-base.html" %}
 {% block title %}LITrevu{% endblock %}
 {% block content %}
-<h2>Demander une critique</h2>
-<div class="posts-container">
-    {% for field in form %}
-        {% if form.errors %}
-            {{ form.errors }}
-        {% endif %}
-    {% endfor %}
-    <div class="form">
-        <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-fields">
-            {{ form.as_p }}
+    <h2>Demander une critique</h2>
+    <div class="posts-container">
+        {% for field in form %}
+            {% if form.errors %}{{ form.errors }}{% endif %}
+        {% endfor %}
+        <div class="form">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-fields">{{ form.as_p }}</div>
+                <input class="send" type="submit" value="Envoyer">
+            </form>
         </div>
-        <input class="send" type="submit" value="Envoyer">
-        </form>
     </div>
-</div>
-{% endblock %} 
+{% endblock %}
