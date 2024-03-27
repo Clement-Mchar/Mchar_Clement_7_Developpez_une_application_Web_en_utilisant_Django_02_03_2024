@@ -62,10 +62,3 @@ class FollowingForm(forms.Form):
         ),
     )
 
-    def clean_username(self):
-        data = self.cleaned_data["username"]
-
-        if User.objects.filter(username=data).exists():
-            return data
-        else:
-            raise ValidationError("Cet utilisateur n'existe pas.")

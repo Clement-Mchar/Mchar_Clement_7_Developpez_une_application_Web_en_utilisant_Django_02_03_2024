@@ -8,6 +8,24 @@ body {
   display: flex;
   flex-flow: row-reverse;
 }
+body .messages {
+  background-color: #ffffff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  opacity: 1;
+  position: absolute;
+  top: 2vh;
+  left: 10vh;
+  transition: opacity 5s ease-in-out;
+  width: 30vh;
+  border-radius: 3vh;
+  text-align: center;
+}
+body .messages.fade-in {
+  opacity: 1;
+}
+body .messages.fade-out {
+  opacity: 0;
+}
 body p {
   padding: 1vh;
   margin: 1vh;

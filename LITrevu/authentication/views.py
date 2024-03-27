@@ -2,14 +2,11 @@ from django.conf import settings
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.contrib import messages
 from .models import User, UserFollow, BlockedUser
 from .forms import FollowingForm
-from django.core.exceptions import ValidationError
-
+from django.db import IntegrityError
 from . import forms
-
 
 # Create your views here.
 def sign(request):
@@ -64,25 +61,28 @@ def follow_user(request):
                     username__iexact=form.cleaned_data["username"]
                 )
             except User.DoesNotExist:
-                raise HttpResponse("cet utilisateur blabla")
+                messages.error(request, "Cet utilisateur n'existe pas")
+                return redirect("followings")
             if BlockedUser.objects.filter(
                 user=request.user, blocked_user=user_to_follow
             ).exists():
-                raise HttpResponse(
-                    "vous ne pouvez pas ajouter utilisateur déjà bloqué"
-                )
+                messages.error(request, "Utilisateur introuvable")
+                return redirect("followings")
             if BlockedUser.objects.filter(
                 user=user_to_follow, blocked_user=request.user
             ).exists():
-                raise HttpResponse("CET UTILISATEUR VOUS A BLOQUÉ")
+                messages.error(request, "Utilisateur introuvable")
+                return redirect("followings")
             if user_to_follow.id == request.user.id:
-                raise HttpResponse("Ne vous ajoutez pas vous même")
+                messages.error(request, "Vous ne pouvez pas vous abonner à vous même.")
+                return redirect("followings")
             try:
                 UserFollow.objects.create(
                     user=request.user, followed_user=user_to_follow
                 )
-            except ValidationError:
-                raise HttpResponse("vous suivez déjà cet utilisateur")
+            except IntegrityError:
+                messages.error(request, "Vous suivez déjà cet utilisateur.")
+                return redirect("followings")
         return redirect("followings")
 
 

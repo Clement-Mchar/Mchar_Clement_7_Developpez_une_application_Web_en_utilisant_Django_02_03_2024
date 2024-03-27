@@ -19,6 +19,25 @@ h1 a {
   color: black;
 }
 
+.messages {
+  background-color: #ffffff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  opacity: 1;
+  position: absolute;
+  top: 2vh;
+  left: 10vh;
+  transition: opacity 5s ease-in-out;
+  width: 30vh;
+  border-radius: 3vh;
+  text-align: center;
+}
+.messages.fade-in {
+  opacity: 1;
+}
+.messages.fade-out {
+  opacity: 0;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -529,6 +548,12 @@ body .ticket-body {
   padding-bottom: 1vh;
   padding-left: 1vh;
   border: 0.3vh solid black;
+}
+body .ticket-body .ticket-response-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 1vh;
 }
 body .ticket-body img {
   width: 20vh;

@@ -1,4 +1,23 @@
 body{
+    .messages {
+        background-color: #ffffff;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        opacity: 1;
+        position: absolute;
+        top:2vh;
+        left: 10vh;
+        transition: opacity 5s ease-in-out;
+        width: 30vh;
+        border-radius: 3vh;
+        text-align: center;
+        &.fade-in {
+            opacity: 1;
+        }
+    
+        &.fade-out {
+            opacity: 0;
+        }
+    }
     p{
         padding: 1vh;
         margin: 1vh;

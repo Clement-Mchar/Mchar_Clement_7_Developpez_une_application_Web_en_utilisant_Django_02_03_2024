@@ -10,7 +10,8 @@
                 {% block title %}LITRevu{% endblock %}
             </title>
             <link rel="stylesheet" href="{% static 'styles.css' %}">
-        {% endcompress %}
+            {% endcompress %}
+            
     </head>
     <body>
         <header>
@@ -24,11 +25,16 @@
                 <a href="{% url 'logout' %}">Se déconnecter</a>
             </nav>
         </header>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="messages">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
         <section>
-            {% if messages %}
-                {% for message in messages %}{{ message }}{% endfor %}
-            {% endif %}
-            {% block content %}{% endblock %}
+            {% block content %}{% endblock content%}
         </section>
+        <script type="text/javascript" src="{% static 'transition.js' %}"></script>
     </body>
 </html>
