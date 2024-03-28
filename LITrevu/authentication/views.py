@@ -2,11 +2,10 @@ from django.conf import settings
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, request
 from django.contrib import messages
 from .models import User, UserFollow, BlockedUser
 from .forms import FollowingForm
-
+from django.db import IntegrityError
 from . import forms
 
 
@@ -22,7 +21,10 @@ def sign(request):
         )
         if user is not None:
             login(request, user)
-            messages.success(request, f"vous êtes connecté en tant que {request.user.username}")
+            messages.success(
+                request,
+                f"Vous êtes connecté en tant que {request.user.username}.",
+            )
             return redirect(settings.LOGIN_REDIRECT_URL)
         else:
             messages.error(request, "Identifiants invalides")
@@ -53,36 +55,50 @@ def logout_user(request):
 @login_required
 def follow_user(request):
     form = FollowingForm(request.POST if request.method == "POST" else None)
-    followings = UserFollow.objects.all()
-    users_blocked = BlockedUser.objects.filter(blocked_user=request.user)
-    blocked_users = BlockedUser.objects.filter(user=request.user)
-    followers_list = UserFollow.objects.filter(followed_user=request.user)
-    followings_list = UserFollow.objects.filter(user=request.user)
     if request.method == "POST":
         if form.is_valid():
-            for user_blocked in users_blocked:
-                if form.cleaned_data["username"] == user_blocked.user.username:
-                    return HttpResponse("Utilisateur introuvable")
-            for user in blocked_users:
-                if form.cleaned_data["username"] == user.blocked_user.username:
-                    return HttpResponse("Utilisateur introuvable")
-            if form.cleaned_data["username"] != request.user.username:
-                UserFollow.objects.create(
-                    user=request.user,
-                    followed_user=(
-                        User.objects.get(username__iexact=form.cleaned_data["username"])
-                    ),
+            try:
+                user_to_follow = User.objects.get(
+                    username__iexact=form.cleaned_data["username"]
                 )
+            except User.DoesNotExist:
+                messages.error(request, "Cet utilisateur n'existe pas")
+                print(request.user.id)
                 return redirect("followings")
-            else:
-                return HttpResponse("Vous ne pouvez pas vous ajouter vous-même")
-    return render(
-        request, "app/followings.html", {"form": form, "followings": followings, "followers_list":followers_list, "followings_list":followings_list}
-    )
+            if BlockedUser.objects.filter(
+                user=request.user, blocked_user=user_to_follow
+            ).exists():
+                messages.error(request, "Utilisateur introuvable")
+                return redirect("followings")
+            if BlockedUser.objects.filter(
+                user=user_to_follow, blocked_user=request.user
+            ).exists():
+                messages.error(request, "Utilisateur introuvable")
+                return redirect("followings")
+            if user_to_follow.id == request.user.id:
+                messages.error(request, "Vous ne pouvez pas vous abonner à vous même.")
+                return redirect("followings")
+            try:
+                UserFollow.objects.create(
+                    user=request.user, followed_user=user_to_follow
+                )
+            except IntegrityError:
+                messages.error(request, "Vous suivez déjà cet utilisateur.")
+                return redirect("followings")
+        return redirect("followings")
+
 
 @login_required
 def unfollow(request, id):
     following = UserFollow.objects.get(id=id, user=request.user)
+    if request.method == "POST":
+        following.delete()
+        return redirect("followings")
+
+
+@login_required
+def delete_follow(request, id):
+    following = UserFollow.objects.get(id=id, followed_user=request.user)
     if request.method == "POST":
         following.delete()
         return redirect("followings")
@@ -97,9 +113,10 @@ def block_user(request, id):
             for following in followings:
                 if following.user == followed.followed_user:
                     following.delete()
-        followed.delete()
-        BlockedUser.objects.create(
-            user=request.user,
-            blocked_user=User.objects.get(username__iexact=followed.followed_user),
-        )
+        if followed.followed_user != request.user:
+            followed.delete()
+            BlockedUser.objects.create(
+                user=request.user,
+                blocked_user=User.objects.get(username__iexact=followed.followed_user),
+            )
         return redirect("followings")

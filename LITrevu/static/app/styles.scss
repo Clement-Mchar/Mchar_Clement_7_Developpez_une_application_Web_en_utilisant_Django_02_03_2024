@@ -2,8 +2,52 @@ a{
     text-decoration: none;
     color: black;
 }
+textarea{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2vh;
+}
+input{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2vh;
+}
 h2{
     text-align: center;
+}
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    padding-left: 2vh;
+    flex: 1.2;
+    font-size: 4vh;
+    a{
+        text-decoration: none;
+        color: black;
+    }
+}
+#id_rating{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.messages {
+    background-color: #e6eff5;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    opacity: 1;
+    position: absolute;
+    top:27vh;
+    left: 77vh;
+    height: 3vh;
+    transition: opacity 5s ease-in-out;
+    width: 50vh;
+    border-radius: 1vh;
+    text-align: center;
+    &.fade-in {
+        opacity: 1;
+    }
+
+    &.fade-out {
+        opacity: 0;
+    }
 }
 body{
     display: flex;
@@ -29,16 +73,10 @@ body{
         height: 7vh;
         margin-bottom: 3vh;
         position: fixed;
-        h1{
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            font-weight: bold;
-            padding-left: 2vh;
-            flex: 1.2;
-            font-size: 4vh;
-            a{
-                text-decoration: none;
-                color: black;
-            }
+        p{
+            position: absolute;
+            left: 3vh;
+            font-size: 3vh;
         }
         nav{
             width: 58vh;
@@ -53,10 +91,8 @@ body{
                 align-items: center;
                 padding-left: 1vh;
                 padding-right: 1vh;
-                padding-top: 0.5vh;
-                padding-bottom: 0.5vh;
                 font-size: 2vh;
-                height: 5vh;
+                height: 7vh;
                 border-left: 0.2vh solid rgb(235, 235, 235);
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
                 &:hover{
@@ -76,8 +112,28 @@ body{
         min-width: 80vw;
         min-height: 50vw;
         max-height: 88vh;
-        overflow: hidden;
+        overflow: overlay;
         margin-top: 11vh;
+        padding-bottom: 1vh;
+        .send{
+            align-self: flex-end;
+            width: 8vh;
+            display: flex;
+            font-size: 1.5vh;
+            max-width: 29vh;
+            border: 0.2vh solid #000000;
+            text-decoration: none;
+            margin-bottom: 1vh;
+            background-color: rgb(243, 243, 243);
+            max-height: 3vh;
+            min-height: 3vh;
+            margin-right: 1vh;
+            place-content: center;
+            &:hover{
+                background-color: #ffffff;
+                cursor: pointer;
+            }
+        }
         h2{
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 5vh;
@@ -93,10 +149,17 @@ body{
             align-items: center;
             flex-direction: column;
             overflow: overlay;
-            height: 100%;
+            height: 90%;
             scrollbar-width: none;
             margin-left: -3vh;
             margin-right: -3vh;
+            padding-top: 1vh;
+            .posts-wrapper{
+                padding: 2vh;
+            }
+            .border{
+                border: 0.3vh solid black;
+            }
         }
         .publish{
             display: flex;
@@ -130,11 +193,69 @@ body{
             display: flex;
             flex-direction: column;
             border: 0.3vh solid black;
+            width: 82vh;
             height: max-content;
-            margin-top: 2.5vh;
-            margin-bottom: 2.5vh;
+            margin-top: 3vh;
+        }
+        .ticket-response{
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            height: max-content;
             padding-left: 1vh;
             padding-right: 1vh;
+            margin-bottom: 1vh;
+        }
+        .ticket-response-form{
+            display: flex;
+            flex-direction: column;
+            border: 0.3vh solid black;
+            border-top: none;
+            width: 80vh;
+            height: max-content;
+            padding-left: 1vh;
+            padding-right: 1vh;
+            padding-right: 1vh;
+            padding-bottom: 1vh;
+            form{
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: space-between;        
+                .form-fields{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                }
+
+            }
+            p{
+                display: flex;
+                flex-direction: column;
+                input[type="file"]{
+                    overflow: hidden;
+                    width: 13vh;
+                    &:active{
+                        overflow: visible;
+                        width: max-content;
+                    }
+                }
+                label{
+                    margin-bottom: 1vh;
+                }
+                #id_description{
+                    height: 30vh;
+                }
+                #id_title{
+                    height: 6vh;
+                }
+            }
+            .send{
+                align-self: flex-end;
+                width: 8vh;
+                display: flex;
+            }
         }
         .ticket-snippet{
             display: flex;
@@ -147,22 +268,45 @@ body{
             padding-left: 1vh;
             padding-right: 1vh;
             padding-bottom: 1vh;
+            .main-ticket-body{
+                display: flex;
+                flex-direction: column;
+                width: 60vh;
+                margin-bottom: 2.5vh;
+                padding-bottom: 1vh;
+                padding-left: 1vh;
+                img{
+                    width: 20vh;
+                }
+            }
             .ticket-header{
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
             }
-            .ticket-body{
+            .ticket-buttons{
                 display: flex;
-                flex-direction: column;
-                width: 20vh;
-                margin-bottom: 2.5vh;
+                flex-direction: row;
+                justify-content: space-between;
+                button{
+                    font-size: 1.5vh;
+                    max-width: 29vh;
+                    border: 0.2vh solid #000000;
+                    max-height: 3vh;
+                    min-height: 3vh;
+                    margin-right: 1vh;
+                    &:hover{
+                        background-color: rgba(255, 255, 255);
+                        cursor: pointer;
+                    }
+                }
             }
             .create-review{
                 align-self: self-end;
                 font-size: 1.5vh;
                 max-width: 29vh;
                 border: 0.2vh solid #000000;
+                border-top:none;
                 max-height: 3vh;
                 min-height: 3vh;
                 &:hover{
@@ -188,6 +332,73 @@ body{
                 justify-content: space-between;
             }
         }
+        .form{
+            display: flex;
+            flex-direction: column;
+            border: 0.3vh solid black;
+            width: 80vh;
+            height: max-content;
+            padding-right: 1vh;
+            padding-left: 1vh;
+            margin-bottom: 1vh;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            form{
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: space-between;            
+                .form-fields{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    input[type="file"]::file-selector-button{
+                        font-size: 1.5vh;
+                        max-width: 29vh;
+                        border: 0.2vh solid #000000;
+                        text-decoration: none;
+                        background-color: rgb(243, 243, 243);
+                        max-height: 3vh;
+                        min-height: 3vh;
+                        margin-right: 1vh;
+                        &:hover{
+                            background-color: #ffffff;
+                            cursor: pointer;
+                        }
+                    }
+                    p{
+                        input[type="checkbox"]{
+                            display: none;
+                        }
+                    }
+                }
+            }
+            p{
+                display: flex;
+                flex-direction: column;
+                input[type="file"]{
+                    overflow: hidden;
+                    width: 13vh;
+                    &:focus-within{
+                        overflow: visible;
+                        width: max-content;
+                    }
+                }
+                label{
+                    margin-bottom: 1vh;
+                }
+                #id_description{
+                    height: 30vh;
+                }
+                #id_title{
+                    height: 5vh;
+                }
+            }
+
+
+        }
     }
     .following-page{
         display: flex;
@@ -199,6 +410,7 @@ body{
             flex-direction: row;
             input{
                 height: 3vh;
+                width:30vh;
                 margin-right: 1vh;
             }
             .follow-button{
@@ -216,7 +428,7 @@ body{
             }
         }
         .followed-list{
-            width: 100vh;
+            width: 120vh;
             text-align-last: center;
 
             .followed-users{
@@ -250,6 +462,60 @@ body{
                         max-width: 30vh;
                         a{
                             font-family: Verdana, Geneva, Tahoma, sans-serif;
+                            font-size: 1.6vh;
+                            height: 100%;
+                            align-items: center;
+                            display: flex;
+                            border-left: 0.3vh solid #e1e1e1;
+                            justify-content: center;
+                            padding-left: 1vh;
+                            padding-right: 1vh;
+                            &:hover{
+                                background-color: rgba(255, 255, 255);
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        .followers-list{
+            width: 120vh;
+            text-align-last: center;
+
+            .followers{
+                .follower:nth-child(even){
+                    background-color: #ffffff;
+                    .followers-buttons{
+                        a{
+                            &:hover{
+                                background-color: #f1f1f1;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+                .follower{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border: 0.1vh solid #e1e1e1;
+                    background-color: #f1f1f1;
+                    height: 4vh;
+                    padding-left: 1vh;
+                    margin-bottom: 0.3vh;
+                    p{
+                        margin: 0vh;
+                        margin-right: 1vh;   
+                    }
+                    .followers-buttons{
+                        height: 4vh;
+                        display: flex;
+                        max-width: 30vh;
+                        a{
+                            font-family: Verdana, Geneva, Tahoma, sans-serif;
+                            font-size: 1.6vh;
                             height: 100%;
                             align-items: center;
                             display: flex;
@@ -298,6 +564,9 @@ body{
             border-radius: 3vh;
             align-items: center;
             border: 0.3vh solid #a7b7c4;
+            form{
+                margin-bottom: 2vh;
+            }
             button{
                 width: 10vh;
                 font-size: 2vh;
@@ -319,6 +588,53 @@ body{
                 max-height: 3vh;
                 min-height: 3vh;
                 border-radius: 3vh;
+                &:hover{
+                    background-color: rgba(255, 255, 255);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .ticket-body{
+        display: flex;
+        flex-direction: column;
+        width: 60vh;
+        margin-bottom: 2.5vh;
+        padding-bottom: 1vh;
+        padding-left: 1vh;
+        margin-left: 1vh;
+        border: 0.3vh solid black;
+        .ticket-response-header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-right: 1vh;
+        }
+        img{
+            width: 20vh;
+        }
+    }
+    .review-body{
+        display: flex;
+        flex-direction: column;
+        width: 60vh;
+        margin-bottom: 2.5vh;
+        padding-bottom: 1vh;
+        padding-left: 1vh;
+        img{
+            width: 20vh;
+        }
+        .review-buttons{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            button{
+                font-size: 1.5vh;
+                max-width: 29vh;
+                border: 0.2vh solid #000000;
+                max-height: 3vh;
+                min-height: 3vh;
+                margin-right: 1vh;
                 &:hover{
                     background-color: rgba(255, 255, 255);
                     cursor: pointer;

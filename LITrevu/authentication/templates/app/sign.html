@@ -1,20 +1,22 @@
+<!DOCTYPE html>
 {% extends "app/authentication-base.html" %}
 {% block title %}LITrevu{% endblock %}
 {% block content %}
-<div class="placeholder"></div>
-<div class="connexion">
-    <div class="sign-up">
-        <h1>Inscrivez-vous</h1>
-        <button><a href="sign-up">S'inscrire</a></button>
-    </div>
-    <div class="login">
-        <h1>Connectez-vous</h1>
-        <form method="post">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <button type="submit" >Se connecter</button>
-        </form>
-    </div>
+    <div class="connexion">
+        <div class="sign-up">
+            <h1>Inscrivez-vous</h1>
+            <button>
+                <a href="sign-up">S'inscrire</a>
+            </button>
+        </div>
+        <div class="login">
+            <h1>Connectez-vous</h1>
+            <form method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

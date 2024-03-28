@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends "templates/app/website-base.html" %}
+{% block title %}Modifiez la critique{% endblock %}
+{% block content %}
+    <h2>Modifiez votre post</h2>
+    {% if form.errors %}{{ form.errors }}{% endif %}
+    <div class="posts-container">
+        <div class="review-ticket">
+            <p>Vous êtes en train de poster en réponse à</p>
+            <div class="ticket-body">
+                <a href="{% url 'ticket_response' review.ticket.id %}">
+                    <div class="ticket-response-header">
+                        <p>{{ review.ticket.user }} a demandé une critique</p>
+                        <p>{{ review.ticket.time_created }}</p>
+                    </div>
+                    <p>{{ review.ticket.title }}</p>
+                    <p>{{ review.ticket.description }}</p>
+                    {% if review.ticket.image %}<img src='{{ review.ticket.image.url }}'>{% endif %}
+                </a>
+            </div>
+            <div class="form">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="send" type="submit" value="Envoyer">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,12 +1,32 @@
 body {
+  place-content: center;
   margin: 0px;
-  background-image: url("../../images/background.webp");
+  background-image: url("../../images/woodplanks_background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
   background-attachment: fixed;
   display: flex;
   flex-flow: row-reverse;
+}
+body .messages {
+  background-color: #e6eff5;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  opacity: 1;
+  position: absolute;
+  top: 27vh;
+  left: 77vh;
+  height: 3vh;
+  transition: opacity 5s ease-in-out;
+  width: 50vh;
+  border-radius: 1vh;
+  text-align: center;
+}
+body .messages.fade-in {
+  opacity: 1;
+}
+body .messages.fade-out {
+  opacity: 0;
 }
 body p {
   padding: 1vh;
@@ -19,7 +39,7 @@ body h1 {
 body input {
   height: 4vh;
   border-radius: 1vh;
-  border: none;
+  border: 0.3vh solid black;
   font-size: 2vh;
   margin: 0vh;
   padding: 0.3vh;
@@ -28,18 +48,23 @@ body button {
   margin: 1.1vh;
 }
 body section {
+  background-color: white;
+  border: 0.4vh rgb(0, 0, 0) solid;
+  align-self: center;
+  width: 80vw;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  background-color: rgba(255, 249, 243, 0.6);
-  width: 100%;
-  height: 100vh;
-  position: fixed;
+  max-width: 80vw;
+  max-height: 88vh;
+  height: 88vh;
+  overflow: hidden;
+  padding-bottom: 1vh;
 }
 body section .logo {
   max-height: 20vh;
   align-self: center;
   min-height: 20vh;
+  margin-bottom: 8vh;
 }
 body section .logo img {
   max-height: 100%;

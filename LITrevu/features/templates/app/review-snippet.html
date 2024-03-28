@@ -1,36 +1,70 @@
+<!DOCTYPE html>
 <div class="review-snippet">
     <a href="{% url 'review' post.id %}">
         <div class="review-header">
             {% if post.user == request.user %}
                 <p>Vous avez publié une critique</p>
             {% else %}
-                <p>{{ post.user }} a publié une critique </p>
+                <p>{{ post.user }} a publié une critique</p>
             {% endif %}
             <p>{{ post.time_created }}</p>
         </div>
     </a>
     <div class="review-body">
         <p>{{ post.headline }}</p>
-        <p>{{ post.rating }}</p>
+        <p>
+            {% if post.rating == 1 %}
+                Mauvais - <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% elif post.rating == 2 %}
+                Moyen - <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% elif post.rating == 3 %}
+                Bon - <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% elif post.rating == 4 %}
+                Très bien - <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% elif post.rating == 5 %}
+                Excellent - <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% endif %}
+        </p>
         <p>{{ post.body }}</p>
-        
-            <div class="review-ticket">
-                <a href="{% url 'ticket' post.ticket.id %}">
+        <div class="ticket-body">
+            <a href="{% url 'ticket' post.ticket.id %}">
                 <p>Ticket - {{ post.ticket.user }}</p>
                 <p>{{ post.ticket.title }}</p>
-                <p>{{ post.ticket.description }}</p> 
-            </div>
+                <p>{{ post.ticket.description }}</p>
+                {% if post.ticket.image %}<img src='{{ post.ticket.image.url }}' alt="{{ post.ticket.image }}">{% endif %}
+            </a>
+        </div>
         {% if post.user == request.user %}
-            <a href="{% url 'update_review' post.id %}">Modifier</a>
-            <a href="#modal-review">Supprimer</a>
+            <div class="review-buttons">
+                <div class="user-actions">
+                    <button>
+                        <a href="{% url 'update_review' post.id %}">Modifier</a>
+                    </button>
+                    <button>
+                        <a href="#modal-review">Supprimer</a>
+                    </button>
+                </div>
+            </div>
             <div id="modal-review" class="modal-window">
                 <div class="modal">
-                    <p>Voulez vous supprimer ce ticket ? </p>
+                    <p>Voulez vous supprimer ce ticket ?</p>
                     <form action="{% url 'delete_review' post.id %}" method="post">
                         {% csrf_token %}
                         <input class="delete-form" type="submit" value="Oui">
                     </form>
-                    <a href="{% url 'review' post.id %}"><button class="close-modal">Non</button></a>
+                    <a href="{% url 'review' post.id %}">
+                        <button class="close-modal">Non</button>
+                    </a>
                 </div>
             </div>
         {% endif %}
