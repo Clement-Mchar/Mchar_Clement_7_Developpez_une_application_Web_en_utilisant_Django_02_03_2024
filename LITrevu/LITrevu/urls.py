@@ -24,7 +24,7 @@ from features import views as features_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("sign", views.sign, name="sign"),
+    path("", views.sign, name="sign"),
     path("sign-up", views.sign_up, name="sign-up"),
     path("welcome", views.welcome, name="welcome"),
     path("logout/", views.logout_user, name="logout"),
