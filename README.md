@@ -25,7 +25,7 @@
 
    5.1 Sur Mac et linux : source <nom de l'environnement virtuel> /bin/activate
 
-8. Exécutez la commande "pip install -r requirements.txt" pour installer les dépendances nécessaires au déroulement du script.
+8. Placez-vous dans le dossier "LITRevu" et exécutez la commande "pip install -r requirements.txt" pour installer les dépendances nécessaires au déroulement du script.
 
 ## Utilisation
 
