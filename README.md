@@ -33,4 +33,4 @@
 2. Rendez-vous à l'adresse url "http://127.0.0.1:8000/sign"
 3. Inscrivez-vous pour utiliser les différentes pages du site.
 4. Pour se connecter à la page admin, utilisez le nom d'utilisateur "root" associé au mot de passe suivant : "admin77220"
-5. Pour tester les fonctionnalités de followings, trois utilisateurs sont actuellements inscrits sur le site : jean, jeanne, et root.
+5. Pour tester les fonctionnalités de followings, trois utilisateurs sont actuellements inscrits sur le site : jean, jeanne, et root. Ils ont tous le même mot de passe.
