@@ -29,7 +29,7 @@
 
 ## Utilisation
 
-1. Dans le terminal de commandes, à la racine du projet ("your_path/LITrevu"), entrez la commande python manage.py runserver
+1. Dans le terminal de commandes, entrez la commande python manage.py runserver
 2. Rendez-vous à l'adresse url "http://127.0.0.1:8000/sign"
 3. Inscrivez-vous pour utiliser les différentes pages du site.
 4. Pour se connecter à la page admin, utilisez le nom d'utilisateur "root" associé au mot de passe suivant : "admin77220"
