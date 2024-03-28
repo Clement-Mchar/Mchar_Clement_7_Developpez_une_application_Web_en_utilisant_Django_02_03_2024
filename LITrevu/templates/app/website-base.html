@@ -13,7 +13,7 @@
     </head>
     <body>
         <header>
-            <p>{{ request.user.username }}</p>
+            <p>Utilisateur connecté : {{ request.user.username }}</p>
             <h1>
                 <a href="{% url 'flux' %}">LITRevu</a>
             </h1>
