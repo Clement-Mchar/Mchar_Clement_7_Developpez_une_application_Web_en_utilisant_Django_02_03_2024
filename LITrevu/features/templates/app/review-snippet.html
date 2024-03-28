@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <div class="review-snippet">
     <a href="{% url 'review' post.id %}">
         <div class="review-header">
@@ -11,14 +12,36 @@
     </a>
     <div class="review-body">
         <p>{{ post.headline }}</p>
-        <p>{{ post.rating }}</p>
+        <p>
+            {% if post.rating == 1 %}
+                Mauvais - <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% elif post.rating == 2 %}
+                Moyen - <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% elif post.rating == 3 %}
+                Bon - <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% elif post.rating == 4 %}
+                Très bien - <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% elif post.rating == 5 %}
+                Excellent - <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+            {% endif %}
+        </p>
         <p>{{ post.body }}</p>
         <div class="ticket-body">
             <a href="{% url 'ticket' post.ticket.id %}">
                 <p>Ticket - {{ post.ticket.user }}</p>
                 <p>{{ post.ticket.title }}</p>
                 <p>{{ post.ticket.description }}</p>
-                {% if post.ticket.image %}<img src='{{ post.ticket.image.url }}'>{% endif %}
+                {% if post.ticket.image %}<img src='{{ post.ticket.image.url }}' alt="{{ post.ticket.image }}">{% endif %}
             </a>
         </div>
         {% if post.user == request.user %}

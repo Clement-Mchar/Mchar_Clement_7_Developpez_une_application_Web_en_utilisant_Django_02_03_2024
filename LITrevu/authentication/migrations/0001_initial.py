@@ -46,9 +46,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "is_superuser",
-                    models.BooleanField(
-                        default=False, verbose_name="superuser"
-                    ),
+                    models.BooleanField(default=False, verbose_name="superuser"),
                 ),
                 (
                     "groups",

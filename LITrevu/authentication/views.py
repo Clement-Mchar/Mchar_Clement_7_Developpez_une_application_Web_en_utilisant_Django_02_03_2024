@@ -8,6 +8,7 @@ from .forms import FollowingForm
 from django.db import IntegrityError
 from . import forms
 
+
 # Create your views here.
 def sign(request):
     if request.user.is_authenticated:
@@ -22,7 +23,7 @@ def sign(request):
             login(request, user)
             messages.success(
                 request,
-                f"vous êtes connecté en tant que {request.user.username}",
+                f"Vous êtes connecté en tant que {request.user.username}.",
             )
             return redirect(settings.LOGIN_REDIRECT_URL)
         else:
@@ -116,8 +117,6 @@ def block_user(request, id):
             followed.delete()
             BlockedUser.objects.create(
                 user=request.user,
-                blocked_user=User.objects.get(
-                    username__iexact=followed.followed_user
-                ),
+                blocked_user=User.objects.get(username__iexact=followed.followed_user),
             )
         return redirect("followings")

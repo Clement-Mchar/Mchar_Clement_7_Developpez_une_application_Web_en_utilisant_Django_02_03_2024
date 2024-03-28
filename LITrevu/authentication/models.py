@@ -42,9 +42,7 @@ class UserFollow(models.Model):
         # ensures we don't get multiple UserFollows instances
         # for unique user-user_followed pairs
         constraints = [
-            UniqueConstraint(
-                name="unique_follow", fields={"user", "followed_user"}
-            )
+            UniqueConstraint(name="unique_follow", fields={"user", "followed_user"})
         ]
 
 

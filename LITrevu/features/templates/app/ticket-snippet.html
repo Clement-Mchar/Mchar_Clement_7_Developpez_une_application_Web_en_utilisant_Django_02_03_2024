@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <div class="ticket-snippet">
     <a href="{% url 'ticket' post.id %}">
         <div class="ticket-header">
@@ -12,7 +13,7 @@
     <div class="main-ticket-body">
         <p>{{ post.title }}</p>
         <p>{{ post.description }}</p>
-        {% if post.image %}<img src='{{ post.image.url }}'>{% endif %}
+        {% if post.image %}<img src='{{ post.image.url }}' alt="{{ post.ticket.image }}">{% endif %}
     </div>
     <div class="ticket-buttons">
         {% if post.user == request.user %}

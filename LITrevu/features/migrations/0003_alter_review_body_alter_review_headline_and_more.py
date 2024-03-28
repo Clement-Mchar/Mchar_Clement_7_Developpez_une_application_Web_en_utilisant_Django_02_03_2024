@@ -13,9 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="review",
             name="body",
-            field=models.TextField(
-                blank=True, verbose_name="Corps du message"
-            ),
+            field=models.TextField(blank=True, verbose_name="Corps du message"),
         ),
         migrations.AlterField(
             model_name="review",

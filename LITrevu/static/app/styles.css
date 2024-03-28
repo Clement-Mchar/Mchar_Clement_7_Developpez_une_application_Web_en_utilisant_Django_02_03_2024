@@ -36,15 +36,16 @@ h1 a {
 }
 
 .messages {
-  background-color: #ffffff;
+  background-color: #e6eff5;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   opacity: 1;
   position: absolute;
-  top: 2vh;
-  left: 10vh;
+  top: 27vh;
+  left: 77vh;
+  height: 3vh;
   transition: opacity 5s ease-in-out;
-  width: 30vh;
-  border-radius: 3vh;
+  width: 50vh;
+  border-radius: 1vh;
   text-align: center;
 }
 .messages.fade-in {
@@ -80,6 +81,11 @@ body header {
   margin-bottom: 3vh;
   position: fixed;
 }
+body header p {
+  position: absolute;
+  left: 3vh;
+  font-size: 3vh;
+}
 body header nav {
   width: 58vh;
   height: 100%;
@@ -111,7 +117,7 @@ body section {
   min-width: 80vw;
   min-height: 50vw;
   max-height: 88vh;
-  overflow: hidden;
+  overflow: overlay;
   margin-top: 11vh;
   padding-bottom: 1vh;
 }
@@ -123,6 +129,7 @@ body section .send {
   max-width: 29vh;
   border: 0.2vh solid #000000;
   text-decoration: none;
+  margin-bottom: 1vh;
   background-color: rgb(243, 243, 243);
   max-height: 3vh;
   min-height: 3vh;
@@ -155,7 +162,10 @@ body section .posts-container {
   padding-top: 1vh;
 }
 body section .posts-container .posts-wrapper {
-  padding: 3vh;
+  padding: 2vh;
+}
+body section .posts-container .border {
+  border: 0.3vh solid black;
 }
 body section .publish {
   display: flex;
@@ -191,8 +201,6 @@ body section .review-ticket {
   border: 0.3vh solid black;
   width: 82vh;
   height: max-content;
-  padding-left: 1vh;
-  padding-right: 1vh;
   margin-top: 3vh;
 }
 body section .ticket-response {
@@ -209,7 +217,7 @@ body section .ticket-response-form {
   flex-direction: column;
   border: 0.3vh solid black;
   border-top: none;
-  width: 82vh;
+  width: 80vh;
   height: max-content;
   padding-left: 1vh;
   padding-right: 1vh;
@@ -332,11 +340,14 @@ body section .form {
   display: flex;
   flex-direction: column;
   border: 0.3vh solid black;
-  width: 76vh;
+  width: 80vh;
   height: max-content;
   padding-right: 1vh;
   padding-left: 1vh;
   margin-bottom: 1vh;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
 }
 body section .form form {
   width: 90%;
@@ -400,6 +411,7 @@ body .following-page form {
 }
 body .following-page form input {
   height: 3vh;
+  width: 30vh;
   margin-right: 1vh;
 }
 body .following-page form .follow-button {
@@ -416,7 +428,7 @@ body .following-page form .follow-button:hover {
   cursor: pointer;
 }
 body .following-page .followed-list {
-  width: 100vh;
+  width: 120vh;
   text-align-last: center;
 }
 body .following-page .followed-list .followed-users .followed-user:nth-child(even) {
@@ -447,6 +459,7 @@ body .following-page .followed-list .followed-users .followed-user .followers-bu
 }
 body .following-page .followed-list .followed-users .followed-user .followers-buttons a {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.6vh;
   height: 100%;
   align-items: center;
   display: flex;
@@ -460,7 +473,7 @@ body .following-page .followed-list .followed-users .followed-user .followers-bu
   cursor: pointer;
 }
 body .following-page .followers-list {
-  width: 100vh;
+  width: 120vh;
   text-align-last: center;
 }
 body .following-page .followers-list .followers .follower:nth-child(even) {
@@ -491,6 +504,7 @@ body .following-page .followers-list .followers .follower .followers-buttons {
 }
 body .following-page .followers-list .followers .follower .followers-buttons a {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.6vh;
   height: 100%;
   align-items: center;
   display: flex;
@@ -534,6 +548,9 @@ body .modal-window .modal {
   align-items: center;
   border: 0.3vh solid #a7b7c4;
 }
+body .modal-window .modal form {
+  margin-bottom: 2vh;
+}
 body .modal-window .modal button {
   width: 10vh;
   font-size: 2vh;
@@ -567,6 +584,7 @@ body .ticket-body {
   margin-bottom: 2.5vh;
   padding-bottom: 1vh;
   padding-left: 1vh;
+  margin-left: 1vh;
   border: 0.3vh solid black;
 }
 body .ticket-body .ticket-response-header {

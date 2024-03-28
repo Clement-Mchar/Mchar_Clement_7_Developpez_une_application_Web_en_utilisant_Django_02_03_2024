@@ -1,20 +1,19 @@
+<!DOCTYPE html>
 {% load static %}
-{% load compress %}
-{% compress css %}
-    <!DOCTYPE html>
     <html lang="fr">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>
-                {% block title %}LITRevu{% endblock %}
-            </title>
+            <title>{% block title %}LITrevu{% endblock %}</title>
+            {% load compress %}
+            {% compress css %}
             <link rel="stylesheet" href="{% static 'styles.css' %}">
             {% endcompress %}
-            
+            <script src="https://kit.fontawesome.com/7104ef3817.js" crossorigin="anonymous" defer></script>
     </head>
     <body>
         <header>
+            <p>{{ request.user.username }}</p>
             <h1>
                 <a href="{% url 'flux' %}">LITRevu</a>
             </h1>
@@ -33,7 +32,7 @@
         {% endfor %}
         {% endif %}
         <section>
-            {% block content %}{% endblock content%}
+            {% block content %}{% endblock content %}
         </section>
         <script type="text/javascript" src="{% static 'transition.js' %}"></script>
     </body>

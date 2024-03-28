@@ -1,5 +1,5 @@
 {% extends "templates/app/website-base.html" %}
-{% block title %}LITrevu{% endblock %}
+{% block title %}Vos posts{% endblock %}
 {% block content %}
     <div class="publish">
         <button>
@@ -11,12 +11,14 @@
     </div>
     <h2>Vos posts</h2>
     <div class="posts-container">
-        {% for post in posts %}
-            {% if post.content_type == 'TICKET' %}
-                {% include 'app/ticket-snippet.html' %}
-            {% elif post.content_type == 'REVIEW' %}
-                {% include 'app/review-snippet.html' %}
-            {% endif %}
-        {% endfor %}
+        <div class="posts-wrapper">
+            {% for post in posts %}
+                {% if post.content_type == 'TICKET' %}
+                    {% include 'app/ticket-snippet.html' %}
+                {% elif post.content_type == 'REVIEW' %}
+                    {% include 'app/review-snippet.html' %}
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

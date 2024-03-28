@@ -57,8 +57,5 @@ class FollowingForm(forms.Form):
     username = forms.CharField(
         max_length=100,
         label="",
-        widget=forms.TextInput(
-            attrs={"placeholder": "Entrez un nom d'utilisateur..."}
-        ),
+        widget=forms.TextInput(attrs={"placeholder": "Entrez un nom d'utilisateur..."}),
     )
-

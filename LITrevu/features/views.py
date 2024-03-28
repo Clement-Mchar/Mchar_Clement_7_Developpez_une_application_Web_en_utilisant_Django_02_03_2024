@@ -7,6 +7,8 @@ from .forms import TicketForm, ReviewForm
 from .models import Ticket, Review
 from authentication.models import UserFollow
 from authentication.forms import FollowingForm
+from django.core.paginator import Paginator
+from django.contrib import messages
 
 # Create your views here.
 
@@ -42,6 +44,9 @@ def ticket_response(request, id):
         request.POST if request.method == "POST" else None,
         request.FILES if request.method == "POST" else None,
     )
+    if Review.objects.filter(ticket=ticket).exists():
+        messages.error(request, "Ce ticket a déjà une critique.")
+        return redirect("flux")
     if request.method == "POST":
         if form.is_valid():
             review = form.save(commit=False)
@@ -90,41 +95,34 @@ def user_posts(request):
 @login_required
 def flux(request):
     followings = UserFollow.objects.filter(user=request.user)
-    if followings:
-        tickets = Ticket.objects.exclude(user=request.user)
-        reviews = Review.objects.exclude(user=request.user)
-        reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
-        tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
-        user_tickets = Ticket.objects.filter(user=request.user)
-        user_reviews = Review.objects.filter(user=request.user)
-        user_reviews = user_reviews.annotate(
-            content_type=Value("REVIEW", CharField())
-        )
-        user_tickets = user_tickets.annotate(
-            content_type=Value("TICKET", CharField())
-        )
-        all_reviews = sorted(
-            chain(reviews, user_reviews),
-            key=lambda post: post.time_created,
-            reverse=True,
-        )
-        all_tickets = sorted(
-            chain(tickets, user_tickets),
-            key=lambda post: post.time_created,
-            reverse=True,
-        )
-        posts = sorted(
-            chain(all_reviews, all_tickets),
-            key=lambda post: post.time_created,
-            reverse=True,
-        )
-        return render(
-            request,
-            "app/flux.html",
-            context={"posts": posts, "followings": followings},
-        )
-    else:
-        return render(request, "app/flux.html")
+    tickets = Ticket.objects.exclude(user=request.user)
+    reviews = Review.objects.exclude(user=request.user)
+    reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
+    tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
+    user_tickets = Ticket.objects.filter(user=request.user)
+    user_reviews = Review.objects.filter(user=request.user)
+    user_reviews = user_reviews.annotate(content_type=Value("REVIEW", CharField()))
+    user_tickets = user_tickets.annotate(content_type=Value("TICKET", CharField()))
+    all_reviews = sorted(
+        chain(reviews, user_reviews),
+        key=lambda post: post.time_created,
+        reverse=True,
+    )
+    all_tickets = sorted(
+        chain(tickets, user_tickets),
+        key=lambda post: post.time_created,
+        reverse=True,
+    )
+    posts = sorted(
+        chain(all_reviews, all_tickets),
+        key=lambda post: post.time_created,
+        reverse=True,
+    )
+    return render(
+        request,
+        "app/flux.html",
+        context={"posts": posts, "followings": followings},
+    )
 
 
 @login_required
@@ -157,7 +155,9 @@ def update_ticket(request, id):
         ticket.time_created = datetime.now()
         ticket_form.save()
         return redirect("user_posts")
-    return render(request, "app/update-ticket.html", {"form": ticket_form, "ticket":ticket})
+    return render(
+        request, "app/update-ticket.html", {"form": ticket_form, "ticket": ticket}
+    )
 
 
 @login_required
@@ -168,7 +168,13 @@ def update_review(request, id):
         request.FILES if request.FILES else None,
         instance=review,
     )
-    return render(request, "app/update-review.html", {"form": review_form, "review":review})
+    if review_form.is_valid():
+        review.time_created = datetime.now()
+        review_form.save()
+        return redirect("user_posts")
+    return render(
+        request, "app/update-review.html", {"form": review_form, "review": review}
+    )
 
 
 @login_required

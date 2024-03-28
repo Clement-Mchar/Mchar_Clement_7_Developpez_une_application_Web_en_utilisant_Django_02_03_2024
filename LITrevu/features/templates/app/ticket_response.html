@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 {% extends "templates/app/website-base.html" %}
-{% block title %}LITrevu{% endblock %}
+{% block title %}Répondre au ticket{% endblock %}
 {% block content %}
     <h2>Créer une critique</h2>
     <div class="posts-container">
@@ -10,7 +11,6 @@
             <p>Vous êtes en train de poster en réponse à</p>
             <div class="ticket-body">
                 <a href="{% url 'ticket_response' ticket.id %}">
-
                     <div class="ticket-response-header">
                         <p>{{ ticket.user }} a demandé une critique</p>
                         <p>{{ ticket.time_created }}</p>

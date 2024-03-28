@@ -30,15 +30,16 @@ h1{
     justify-content: space-around;
 }
 .messages {
-    background-color: #ffffff;
+    background-color: #e6eff5;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     opacity: 1;
     position: absolute;
-    top:2vh;
-    left: 10vh;
+    top:27vh;
+    left: 77vh;
+    height: 3vh;
     transition: opacity 5s ease-in-out;
-    width: 30vh;
-    border-radius: 3vh;
+    width: 50vh;
+    border-radius: 1vh;
     text-align: center;
     &.fade-in {
         opacity: 1;
@@ -72,6 +73,11 @@ body{
         height: 7vh;
         margin-bottom: 3vh;
         position: fixed;
+        p{
+            position: absolute;
+            left: 3vh;
+            font-size: 3vh;
+        }
         nav{
             width: 58vh;
             height: 100%;
@@ -106,7 +112,7 @@ body{
         min-width: 80vw;
         min-height: 50vw;
         max-height: 88vh;
-        overflow: hidden;
+        overflow: overlay;
         margin-top: 11vh;
         padding-bottom: 1vh;
         .send{
@@ -117,7 +123,7 @@ body{
             max-width: 29vh;
             border: 0.2vh solid #000000;
             text-decoration: none;
-
+            margin-bottom: 1vh;
             background-color: rgb(243, 243, 243);
             max-height: 3vh;
             min-height: 3vh;
@@ -149,7 +155,10 @@ body{
             margin-right: -3vh;
             padding-top: 1vh;
             .posts-wrapper{
-                padding: 3vh;
+                padding: 2vh;
+            }
+            .border{
+                border: 0.3vh solid black;
             }
         }
         .publish{
@@ -186,8 +195,6 @@ body{
             border: 0.3vh solid black;
             width: 82vh;
             height: max-content;
-            padding-left: 1vh;
-            padding-right: 1vh;
             margin-top: 3vh;
         }
         .ticket-response{
@@ -204,7 +211,7 @@ body{
             flex-direction: column;
             border: 0.3vh solid black;
             border-top: none;
-            width: 82vh;
+            width: 80vh;
             height: max-content;
             padding-left: 1vh;
             padding-right: 1vh;
@@ -215,7 +222,7 @@ body{
                 display: flex;
                 flex-direction: column;
                 flex-wrap: wrap;
-                justify-content: space-between;            
+                justify-content: space-between;        
                 .form-fields{
                     display: flex;
                     flex-direction: column;
@@ -329,11 +336,14 @@ body{
             display: flex;
             flex-direction: column;
             border: 0.3vh solid black;
-            width: 76vh;
+            width: 80vh;
             height: max-content;
             padding-right: 1vh;
             padding-left: 1vh;
             margin-bottom: 1vh;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
             form{
                 width: 90%;
                 display: flex;
@@ -400,6 +410,7 @@ body{
             flex-direction: row;
             input{
                 height: 3vh;
+                width:30vh;
                 margin-right: 1vh;
             }
             .follow-button{
@@ -417,7 +428,7 @@ body{
             }
         }
         .followed-list{
-            width: 100vh;
+            width: 120vh;
             text-align-last: center;
 
             .followed-users{
@@ -451,6 +462,7 @@ body{
                         max-width: 30vh;
                         a{
                             font-family: Verdana, Geneva, Tahoma, sans-serif;
+                            font-size: 1.6vh;
                             height: 100%;
                             align-items: center;
                             display: flex;
@@ -469,7 +481,7 @@ body{
             }
         }
         .followers-list{
-            width: 100vh;
+            width: 120vh;
             text-align-last: center;
 
             .followers{
@@ -503,6 +515,7 @@ body{
                         max-width: 30vh;
                         a{
                             font-family: Verdana, Geneva, Tahoma, sans-serif;
+                            font-size: 1.6vh;
                             height: 100%;
                             align-items: center;
                             display: flex;
@@ -551,6 +564,9 @@ body{
             border-radius: 3vh;
             align-items: center;
             border: 0.3vh solid #a7b7c4;
+            form{
+                margin-bottom: 2vh;
+            }
             button{
                 width: 10vh;
                 font-size: 2vh;
@@ -586,6 +602,7 @@ body{
         margin-bottom: 2.5vh;
         padding-bottom: 1vh;
         padding-left: 1vh;
+        margin-left: 1vh;
         border: 0.3vh solid black;
         .ticket-response-header{
             display: flex;

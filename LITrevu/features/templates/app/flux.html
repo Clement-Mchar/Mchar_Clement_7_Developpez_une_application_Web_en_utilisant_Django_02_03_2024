@@ -1,5 +1,7 @@
 {% extends "templates/app/website-base.html" %}
-{% block title %}LITrevu{% endblock %}
+{% block title %}
+    Flux
+{% endblock title %}
 {% block content %}
     <div class="publish">
         <button>
@@ -13,7 +15,7 @@
     <div class="posts-container">
         <div class="posts-wrapper">
             {% for post in posts %}
-                {% if post.user == request.user %}
+                {% if post.user == user %}
                     {% if post.content_type == 'TICKET' %}
                         {% include 'app/ticket-snippet.html' %}
                     {% elif post.content_type == 'REVIEW' %}

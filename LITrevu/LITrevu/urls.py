@@ -50,9 +50,7 @@ urlpatterns = [
         name="delete_follow_modal",
     ),
     path("ticket/<id>/", features_views.ticket, name="ticket"),
-    path(
-        "ticket/<id>/#modal-ticket", features_views.ticket, name="ticket_modal"
-    ),
+    path("ticket/<id>/#modal-ticket", features_views.ticket, name="ticket_modal"),
     path(
         "ticket_response/<id>",
         features_views.ticket_response,
@@ -60,12 +58,8 @@ urlpatterns = [
     ),
     path("review/<id>/#modal-review", features_views.review, name="review"),
     path("review/<id>/", features_views.review, name="review_modal"),
-    path(
-        "edit_ticket/<id>/", features_views.update_ticket, name="update_ticket"
-    ),
-    path(
-        "edit_review/<id>/", features_views.update_review, name="update_review"
-    ),
+    path("edit_ticket/<id>/", features_views.update_ticket, name="update_ticket"),
+    path("edit_review/<id>/", features_views.update_review, name="update_review"),
     path(
         "delete_ticket/<id>",
         features_views.delete_ticket,
@@ -82,6 +76,4 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-    )
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
