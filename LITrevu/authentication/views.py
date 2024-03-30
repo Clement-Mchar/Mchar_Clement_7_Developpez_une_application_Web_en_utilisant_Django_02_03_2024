@@ -43,6 +43,8 @@ def sign_up(request):
     if request.method == "POST":
         if form.is_valid():
             form.save()
+            messages.success(request, "Vous êtes inscrits ! Vous pouvez maintenant vous connecter.")
+            return redirect('sign')
     return render(request, "app/sign-up.html", context={"form": form})
 
 

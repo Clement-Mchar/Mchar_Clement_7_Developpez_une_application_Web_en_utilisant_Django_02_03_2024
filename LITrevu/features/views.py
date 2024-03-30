@@ -142,7 +142,6 @@ def review(request, id):
     review = Review.objects.get(id=id)
     return render(request, "app/selected-review.html", {"post": review})
 
-
 @login_required
 def update_ticket(request, id):
     ticket = Ticket.objects.get(id=id, user=request.user)
